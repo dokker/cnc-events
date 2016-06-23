@@ -43,3 +43,11 @@ function __cnc_events_load_plugin()
 }
 
 add_action('plugins_loaded', '__cnc_events_load_plugin');
+
+// Actualize rewrite rules on plugin state change
+register_activation_hook( __FILE__, function () {
+    flush_rewrite_rules();
+} );
+register_deactivation_hook( __FILE__, function () {
+    flush_rewrite_rules();
+} );
