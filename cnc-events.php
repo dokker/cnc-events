@@ -44,6 +44,15 @@ function __cnc_events_load_plugin()
 
 add_action('plugins_loaded', '__cnc_events_load_plugin');
 
+function __cnc_events_archive_template( $template ) {
+	if(is_post_type_archive('event')) {
+		$template = CNC_TEMPLATE_DIR . CNC_DS. 'archive-events.php';
+	}
+	return $template;
+}
+
+add_filter( 'archive_template', '__cnc_events_archive_template' );
+
 // Actualize rewrite rules on plugin state change
 register_activation_hook( __FILE__, function () {
     flush_rewrite_rules();
