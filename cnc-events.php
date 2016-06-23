@@ -35,6 +35,11 @@ function __cnc_events_load_plugin()
 	// load translations
 	load_plugin_textdomain( 'cnc-events', false, 'cnc-events/languages' );
 
+	$events = new cncEV\ContentType('event', 
+		['menu_icon' => 'dashicons-calendar-alt', 'has_archive' => true, 'supports' => ['title', 'editor', 'thumbnail']], 
+		['singular_name' => __('Event', 'tr-site-content'), 'plural_name' => __('Events', 'tr-site-content')],
+		_x('events', 'events archive slug', 'tr-site-content'));
+
 }
 
 add_action('plugins_loaded', '__cnc_events_load_plugin');
