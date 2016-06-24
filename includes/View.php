@@ -7,6 +7,11 @@ class View {
 
 	function __construct()
 	{
+		// Register hooks
+		add_filter('cnc_smart_link', [$this, 'smart_link'], 10, 3);
+		add_filter('cnc_format_date_field', [$this, 'format_date_field'], 10, 2);
+		add_filter('cnc_format_time_field', [$this, 'format_time_field'], 10, 2);
+		add_filter('cnc_limit_string', [$this, 'limit_string'], 10, 3);
 	}
 
 	/**
@@ -34,5 +39,65 @@ class View {
 		ob_start();
 		include($file);
 		return ob_get_clean();
+	}
+
+	/**
+	 * Render smart link button
+	 * @param  string $url     Link url
+	 * @param  string $label   Smart link text
+	 * @param  string $classes Additional CSS classes
+	 * @return string          HTML markup of the button
+	 */
+	public function smart_link($url, $label, $classes = '')
+	{
+	  $smartlink = sprintf('<a class="smart-link %s" href="%s">', $classes, $url);
+	  $smartlink .= sprintf('<span class="smart-link__label">%s</span>', $label);
+	  $smartlink .= '<span class="smart-link__arrow-wrap"><span class="smart-link__arrow">&#9658; &#9658;</span></span>';
+	  $smartlink .= '</a>';
+	  return $smartlink;
+	}
+
+	/**
+	 * Format date field value to given format
+	 * @param  int $datefield Date strored in field
+	 * @param  string $format    Output date format
+	 * @return string            Formatted date
+	 */
+	public function format_date_field($datefield, $format = 'Y.m.d')
+	{
+	  $format_in = 'Ymd'; // the format your value is saved in (set in the field options)
+	  $format_out = $format; // the format you want to end up with
+
+	  $date = \DateTime::createFromFormat($format_in, $datefield);
+
+	  return $date->format($format_out);
+	}
+
+	/**
+	 * Format time field value to given format
+	 * @param  int $timestamp Time strored in field
+	 * @param  string $format    Output time format
+	 * @return string            Formatted time
+	 */
+	public function format_time_field($timestamp, $format = 'H:m')
+	{
+	  $format_out = $format; // the format you want to end up with
+
+	  $date = new \DateTime('@' . $timestamp);
+
+	  return $date->format($format_out);
+	}
+
+	/**
+	 * Trim given text to specified length
+	 * @param  string $string   Text to trim
+	 * @param  int $length   Length in characters
+	 * @param  string $replacer Pattern to end with
+	 * @return string           Trimmed text
+	 */
+	public function limit_string($string, $length, $replacer = '...') {
+	  if (strlen($string) > $length)
+	     $string = mb_substr($string, 0, $length-3) . $replacer;
+	  return $string;
 	}
 }

@@ -40,6 +40,10 @@ function __cnc_events_load_plugin()
 		['singular_name' => __('Event', 'tr-site-content'), 'plural_name' => __('Events', 'tr-site-content')],
 		_x('events', 'events archive slug', 'tr-site-content'));
 
+	// instantiate classes to register hooks
+	$model = new cncEV\Model();
+	$view = new cncEV\View();
+
 }
 
 add_action('plugins_loaded', '__cnc_events_load_plugin');
@@ -52,6 +56,16 @@ function __cnc_events_archive_template( $template ) {
 }
 
 add_filter( 'archive_template', '__cnc_events_archive_template' );
+
+function __cnc_change_sort_order($query){
+    if(is_post_type_archive('event')) {
+    	$query->set('meta_key', 'event_date');
+    	$query->set('order', 'DESC');
+    	$query->set('orderby', 'meta_value_num');
+    }
+};
+
+add_action( 'pre_get_posts', '__cnc_change_sort_order'); 
 
 // Actualize rewrite rules on plugin state change
 register_activation_hook( __FILE__, function () {
