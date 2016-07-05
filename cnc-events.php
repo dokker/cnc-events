@@ -37,8 +37,8 @@ function __cnc_events_load_plugin()
 
 	$events = new cncEV\ContentType('event', 
 		['menu_icon' => 'dashicons-calendar-alt', 'has_archive' => true, 'supports' => ['title', 'editor', 'thumbnail']], 
-		['singular_name' => __('Event', 'tr-site-content'), 'plural_name' => __('Events', 'tr-site-content')],
-		_x('events', 'events archive slug', 'tr-site-content'));
+		['singular_name' => __('Event', 'cnc-events'), 'plural_name' => __('Events', 'cnc-events')],
+		_x('events', 'events archive slug', 'cnc-events'));
 
 	// instantiate classes to register hooks
 	$model = new cncEV\Model();
