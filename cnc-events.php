@@ -43,6 +43,7 @@ function __cnc_events_load_plugin()
 	// instantiate classes to register hooks
 	$model = new cncEV\Model();
 	$view = new cncEV\View();
+	$controller = new cncEV\Controller();
 
 }
 
