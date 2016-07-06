@@ -1,9 +1,28 @@
+article.event {
+	background: #FDD207;
+	color: #060C1C;
+	padding-left: 25px;
+}
+
+article.event:hover {
+	color: #FDD207;
+	background: #060C1C;
+}
+
+article.event:hover a {
+	color: #FDD207;
+}
+
+article.event:hover .date {
+	border-bottom: 2px solid #FDD207;
+}
+
 article.event .entry-title {
-    font-size: 26px;
+    font-size: 24px;
     margin-top: 20px;
     margin-bottom: 10px;
     height: 100px;
-    line-height: 30px;
+    line-height: 29px;
 }
 
 article.event .date {
@@ -12,7 +31,7 @@ article.event .date {
 	padding-bottom: 9px;
 	font-size: 3.3em;
 	font-family: bebas-bold,Arial,Helvetica,sans-serif;
-	border-bottom: 2px solid #000;
+	border-bottom: 2px solid #060C1C;
 	line-height: normal;
 	font-weight: bold;
 }
@@ -31,6 +50,14 @@ article.event .entry-wrap {
 .featured-area img {
 	width: 100%;
 	height: auto;
+}
+
+.single-event address,
+.single-event time,
+.single-event .content {
+	margin-top: 20px;
+	display: block;
+	position: relative;
 }
 
 .acf-map {
