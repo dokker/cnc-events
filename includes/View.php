@@ -12,6 +12,8 @@ class View {
 		add_filter('cnc_format_date_field', [$this, 'format_date_field'], 10, 2);
 		add_filter('cnc_format_time_field', [$this, 'format_time_field'], 10, 2);
 		add_filter('cnc_limit_string', [$this, 'limit_string'], 10, 3);
+
+		add_image_size( 'event-medium', 750, 450, true );
 	}
 
 	/**

@@ -58,6 +58,15 @@ function __cnc_events_archive_template( $template ) {
 
 add_filter( 'archive_template', '__cnc_events_archive_template' );
 
+function __cnc_events_single_template( $template ) {
+	if(get_post_type() == 'event') {
+		$template = CNC_TEMPLATE_DIR . CNC_DS. 'single-event.php';
+	}
+	return $template;
+}
+
+add_filter( 'single_template', '__cnc_events_single_template' );
+
 function __cnc_change_sort_order($query){
     if(is_post_type_archive('event')) {
     	$query->set('meta_key', 'event_date');

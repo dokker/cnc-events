@@ -27,3 +27,8 @@ article.event address {
 article.event .entry-wrap {
 	padding: 25px 0;
 }
+
+.featured-area img {
+	width: 100%;
+	height: auto;
+}
