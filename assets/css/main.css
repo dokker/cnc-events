@@ -4,6 +4,10 @@ article.event {
 	padding-left: 25px;
 }
 
+article.event.older {
+	opacity: 0.5;
+}
+
 article.event:hover {
 	color: #FDD207;
 	background: #060C1C;
@@ -30,7 +34,6 @@ article.event .date {
 	width: 100%;
 	padding-bottom: 9px;
 	font-size: 3.3em;
-	font-family: bebas-bold,Arial,Helvetica,sans-serif;
 	border-bottom: 2px solid #060C1C;
 	line-height: normal;
 	font-weight: bold;

@@ -14,6 +14,9 @@ class View {
 		add_filter('cnc_limit_string', [$this, 'limit_string'], 10, 3);
 
 		add_image_size( 'event-medium', 750, 450, true );
+
+		add_shortcode('cnc_events_latest', [$this, 'shortcodeLatest']);
+		add_filter('widget_text', 'do_shortcode');
 	}
 
 	/**
@@ -101,5 +104,23 @@ class View {
 	  if (strlen($string) > $length)
 	     $string = mb_substr($string, 0, $length-3) . $replacer;
 	  return $string;
+	}
+
+	/**
+	 * Generate latest events shortcode
+	 * @param  array $args Given attributes
+	 */
+	public function shortcodeLatest($args)
+	{
+	    // extract the attributes into variables
+	    $atts = shortcode_atts(array(
+	        'num' => -1,
+	    ), $args);
+
+	    $model = new \cncEV\Model();
+	    $events = $model->getLatestEvents($atts['num']);
+	    $this->assign('events_query', $events);
+
+	    return $this->render('shortcode-latest');
 	}
 }
