@@ -37,7 +37,7 @@ class View {
 	public function render($template)
 	{
 		extract($this->data);
-		$file = CNCNL_TEMPLATE_DIR . CNCNL_DS . $template . '.php';
+		$file = CNC_TEMPLATE_DIR . CNC_DS . $template . '.tpl.php';
 		if (!file_exists($file)) {
 			throw new \Exception("File doesn't exist");
 		}
