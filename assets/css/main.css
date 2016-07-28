@@ -13,6 +13,10 @@ article.event:hover {
 	background: #060C1C;
 }
 
+article.event a {
+	color: #060C1C;
+}
+
 article.event:hover a {
 	color: #FDD207;
 }
@@ -37,6 +41,11 @@ article.event .date {
 	border-bottom: 2px solid #060C1C;
 	line-height: normal;
 	font-weight: bold;
+}
+
+time.time {
+	height: 36px;
+	display: block;
 }
 
 article.event address {
