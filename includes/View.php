@@ -88,7 +88,8 @@ class View {
 	{
 	  $format_out = $format; // the format you want to end up with
 
-	  $date = new \DateTime('@' . $timestamp);
+	  $date = new \DateTime();
+	  $date->setTimestamp($timestamp);
 
 	  return $date->format($format_out);
 	}
