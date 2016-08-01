@@ -13,7 +13,11 @@
 				<?php endif; ?>
 				</div>
 				<address><?php the_field('event_location_name'); ?></address>
-				<time><?php echo apply_filters('cnc_format_date_field', get_field('event_date'), 'Y.m.d.'); ?> <?php echo apply_filters('cnc_format_time_field', get_field('event_time')); ?></time>
+				<time>
+					<?php echo apply_filters('cnc_format_date_field', get_field('event_date'), 'Y.m.d.'); ?> 
+					<?php echo apply_filters('cnc_format_time_field', get_field('event_time')); ?>
+					<?php echo (!empty(get_field('event_date_end'))) ? ' - ' . apply_filters('cnc_format_date_field', get_field('event_date_end'), 'Y.m.d.') : ''; ?>
+				</time>
 				<div class="content"><?php the_content( $more_link_text, $strip_teaser ); ?></div>
 				<?php $location = get_field('event_location');
 				if( !empty($location) ): ?>
