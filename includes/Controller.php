@@ -36,7 +36,7 @@ class Controller
 
 	public function googleMapAPI($api)
 	{
-		$api['key'] = $google_maps_api;
+		$api['key'] = $this->google_maps_api;
 		return $api;
 	}
 }
