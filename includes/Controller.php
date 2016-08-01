@@ -10,7 +10,7 @@ class Controller
 	{
 		add_action('wp_enqueue_scripts', [$this, 'registerScripts']);
 		add_action('wp_enqueue_scripts', [$this, 'registerStyles']);
-		add_filter('acf/fields/google_map/api', 'googleMapAPI');
+		add_filter('acf/fields/google_map/api', [$this, 'googleMapAPI']);
 	}
 
 	/**
