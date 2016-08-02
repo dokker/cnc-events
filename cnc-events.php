@@ -41,10 +41,7 @@ function __cnc_events_load_plugin()
 		_x('events', 'events archive slug', 'cnc-events'));
 
 	// instantiate classes to register hooks
-	$model = new cncEV\Model();
-	$view = new cncEV\View();
 	$controller = new cncEV\Controller();
-	$acf = new cncEV\ACF();
 }
 
 add_action('plugins_loaded', '__cnc_events_load_plugin');

@@ -8,9 +8,14 @@ class Controller
 	
 	function __construct()
 	{
+		$this->model = new \cncEV\Model();
+		$this->view = new \cncEV\View();
+		$this->acf = new \cncEV\ACF();
+
 		add_action('wp_enqueue_scripts', [$this, 'registerScripts']);
 		add_action('wp_enqueue_scripts', [$this, 'registerStyles']);
 		add_filter('acf/fields/google_map/api', [$this, 'googleMapAPI']);
+		add_action('pre_get_posts', [$this, 'modify_events_archive_query']);
 	}
 
 	/**
@@ -38,5 +43,15 @@ class Controller
 	{
 		$api['key'] = $this->google_maps_api;
 		return $api;
+	}
+
+	public function modify_events_archive_query( $query ) {
+		if ( is_post_type_archive('event') && is_main_query() ) {
+			set_query_var( 'orderby', 'meta_value_num' );
+			set_query_var( 'order', 'ASC' );
+	        set_query_var( 'meta_key', 'event_date' );
+	        set_query_var( 'meta_value', $this->view->get_current_date('Ymd') );
+	        set_query_var( 'meta_compare', '>=' );
+	    }
 	}
 }
