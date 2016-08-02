@@ -95,6 +95,17 @@ class View {
 	}
 
 	/**
+	 * Get current date formatted in specified format
+	 * @param string $format Date format to return
+	 * @return string Formatted date
+	 */
+	public function get_current_date($format = 'Ymd')
+	{
+		$date = new \DateTime();
+		return $date->format($format);
+	}
+
+	/**
 	 * Trim given text to specified length
 	 * @param  string $string   Text to trim
 	 * @param  int $length   Length in characters
@@ -119,6 +130,7 @@ class View {
 	    ), $args);
 
 	    $model = new \cncEV\Model();
+	    $model->set_current_date($this->get_current_date('Ymd'));
 	    $events = $model->getLatestEvents($atts['num']);
 	    $this->assign('events_query', $events);
 

@@ -3,6 +3,7 @@ namespace cncEV;
 
 class Model
 {
+	private $current_date;
 	
 	function __construct()
 	{
@@ -35,10 +36,21 @@ class Model
 			'post_type' => 'event',
 			'posts_per_page' => $num,
 			'meta_key' => 'event_date',
+			'meta_value' => $this->current_date,
+			'meta_compare' => '>=',
 			'orderby' => 'meta_value_num',
-			'order' => 'DESC',
+			'order' => 'ASC',
 		];
 		$query = new \WP_Query($args);
 		return $query;
+	}
+
+	/**
+	 * Set current date field
+	 * @param string $date Current date in Ymd format
+	 */
+	public function set_current_date($date)
+	{
+		$this->current_date = $date;
 	}
 }
