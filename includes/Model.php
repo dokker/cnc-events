@@ -53,4 +53,41 @@ class Model
 	{
 		$this->current_date = $date;
 	}
+
+	/**
+	 * Get current year
+	 * @return int A full numeric representation of a year, 4 digits (2003)
+	 */
+	public function thisYear()
+	{
+		$ts = current_time('timestamp');
+		return gmdate('Y', $ts);
+	}
+
+	/**
+	 * Get current month
+	 * @return int Numeric representation of a month, with leading zeros (01 through 12)
+	 */
+	public function thisMonth()
+	{
+		$ts = current_time('timestamp');
+		return gmdate('m', $ts);
+	}
+
+	/**
+	 * Get calendar structure
+	 * @param  int $year  Year in Y format
+	 * @param  int $month Month in m format
+	 * @return array        Array of a month
+	 */
+	public function generateCalendar($year, $month)
+	{
+		global $wp_locale;
+		$unixmonth = mktime( 0, 0 , 0, $month, 1, $year );
+		$last_day = date( 't', $unixmonth );
+		$caption = date_i18n('Y F', $unixmonth);
+		$calendar = [];
+		return $calendar;
+	}
+
 }
