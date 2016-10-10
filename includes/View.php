@@ -142,12 +142,8 @@ class View {
 	 * Generate calendar shortcode
 	 * @return string       Generated shortcode
 	 */
-	public function shortcodeCalendar($args)
+	public function shortcodeCalendar()
 	{
-	    // extract the attributes into variables
-	    $atts = shortcode_atts(array(
-	    ), $args);
-
 	    $model = new \cncEV\Model();
 	    $calendar = $model->generateCalendar(2016, 10);
 
