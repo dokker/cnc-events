@@ -10,7 +10,7 @@
 
 <div class="mk-grid">
 <?php while (have_posts()) : the_post(); ?>
-	<article class="mk-col-3-12 col-md-3 col-sm-4 <?php echo (apply_filters('cnc_is_before_today', get_field('event_date')) ? 'older' : 'actual'); ?> <?php echo join( ' ', get_post_class() ); ?>">
+	<article class="mk-col-3-12 col-md-3 col-sm-4 <?php echo (apply_filters('cnc_is_before_today', get_field('event_date', false, false)) ? 'older' : 'actual'); ?> <?php echo join( ' ', get_post_class() ); ?>">
 		<div class="entry-wrap">
 			<header>
 				<address><?php the_field('event_location_name'); ?></address>
