@@ -16,6 +16,7 @@ class View {
 		add_image_size( 'event-medium', 750, 450, true );
 
 		add_shortcode('cnc_events_latest', [$this, 'shortcodeLatest']);
+		add_shortcode('cnc_events_calendar', [$this, 'shortcodeCalendar']);
 		add_filter('widget_text', 'do_shortcode');
 	}
 
@@ -135,5 +136,23 @@ class View {
 	    $this->assign('events_query', $events);
 
 	    return $this->render('shortcode-latest');
+	}
+
+	/**
+	 * Generate calendar shortcode
+	 * @return string       Generated shortcode
+	 */
+	public function shortcodeCalendar($args)
+	{
+	    // extract the attributes into variables
+	    $atts = shortcode_atts(array(
+	    ), $args);
+
+	    $model = new \cncEV\Model();
+	    $calendar = $model->generateCalendar(2016, 10);
+
+	    $this->assign('events_calendar', $calendar);
+
+	    return $this->render('shortcode-calendar');
 	}
 }
