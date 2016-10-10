@@ -14,7 +14,7 @@
 				</div>
 				<address><?php the_field('event_location_name'); ?></address>
 				<time>
-					<?php echo apply_filters('cnc_format_date_field', get_field('event_date'), 'Y.m.d.'); ?> -
+					<?php echo apply_filters('cnc_format_date_field', get_field('event_date', false, false), 'Y.m.d.'); ?> -
 					<?php echo get_field('event_time'); ?>
 					<?php echo (!empty(get_field('event_date_end'))) ? ' - ' . apply_filters('cnc_format_date_field', get_field('event_date_end'), 'Y.m.d.') : ''; ?>
 				</time>
