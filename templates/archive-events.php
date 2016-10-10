@@ -15,7 +15,7 @@
 			<header>
 				<address><?php the_field('event_location_name'); ?></address>
 				<time class="date">
-					<h2><a href="<?php the_permalink(); ?>"><span><?php echo apply_filters('cnc_format_date_field', get_field('event_date'), 'y/m/d'); ?></span></a></h2>
+					<h2><a href="<?php the_permalink(); ?>"><span><?php echo apply_filters('cnc_format_date_field', get_field('event_date', false, false), 'y/m/d'); ?></span></a></h2>
 				</time>
 				<h2 class="entry-title"><a href="<?php the_permalink(); ?>"><?php echo apply_filters('cnc_limit_string', get_the_title(), 70); ?></a></h2>
 				<time class="time">
