@@ -85,37 +85,47 @@ class Model
 		global $wp_locale, $wpdb;
 		// current time
 		$unixmonth = mktime( 0, 0 , 0, $month, 1, $year );
+		$ts = current_time( 'timestamp' );
 		$week_begins = (int) get_option( 'start_of_week' );
 		$last_day = date( 't', $unixmonth );
 		$daysinmonth = (int) date( 't', $unixmonth );
 		// caption for calendar
 		$caption = date_i18n('Y F', $unixmonth);
-		// calendar data
-		$calendar = [];
-
 		// abbrevated day names of the week
+
 		$week = [];
 		for ( $wdcount = 0; $wdcount <= 6; $wdcount++ ) {
 			$dayname = $wp_locale->get_weekday( ( $wdcount + $week_begins ) % 7 );
 			$week[] = $wp_locale->get_weekday_abbrev($dayname);
 		}
 
-		$daywithpost = array();
-		// Get days with posts
-		$dayswithposts = $wpdb->get_results("SELECT DISTINCT DAYOFMONTH(post_date)
-			FROM $wpdb->posts WHERE post_date >= '{$year}-{$month}-01 00:00:00'
-			AND post_type = 'event' AND post_status = 'publish'
-			AND post_date <= '{$year}-{$month}-{$last_day} 23:59:59'", ARRAY_N);
-		if ( $dayswithposts ) {
-			var_dump($dayswithposts);
-			foreach ( (array) $dayswithposts as $daywith ) {
-				$daywithpost[] = $daywith[0];
+		// strarting day of the week
+		(int)$daycntr = calendar_week_mod( date( 'w', $unixmonth ) - $week_begins );
+
+		// calendar data
+		$calendar = [];
+		for ($day= 1; $day<= $daysinmonth; $day++) {
+			$day_actual = date('Ymd', strtotime( "{$year}-{$month}-{$day}"));
+			$day_data = [];
+			$day_data['date'] = $day_actual;
+			// Check for today
+			if ( $day== gmdate( 'j', $ts ) &&
+				$month == gmdate( 'm', $ts ) &&
+				$year == gmdate( 'Y', $ts ) ) {
+				$day_data['today'] = true;
 			}
+
+			// day of the week label
+			$day_data['dow'] = $week[$daycntr];
+			if ($daycntr == 6) {
+				$daycntr = 0;
+			} else {
+				$daycntr++;
+			}
+
+			$calendar[$day] = $day_data;
 		}
 
-		for ($daycntr = 1; $daycntr <= $daysinmonth; $daycntr++) {
-
-		}
 		return $calendar;
 	}
 
