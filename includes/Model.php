@@ -123,10 +123,46 @@ class Model
 				$daycntr++;
 			}
 
+			// collect events on this day
+			$day_data['events'] = $this->eventsByDate($year . $month . sprintf("%02d", $day));
+
 			$calendar[$day] = $day_data;
 		}
 
 		return $calendar;
+	}
+
+	/**
+	 * Get events on specified date
+	 * @param  int $date Date in Ymd format
+	 * @return array       Event post list
+	 */
+	public function eventsByDate($date)
+	{
+		$args = [
+			'post_type' => 'event',
+			'posts_per_page' => -1,
+			'status' => 'published',
+			'orderby'		=> 'meta_value_num',
+			'order'			=> 'ASC',
+			'meta_query'		=> array(
+				'relation' => 'AND',
+				array(
+					'key' => 'event_date',
+					'compare' => '<=',
+					'type' => 'numeric',
+					'value' => $date,
+					),
+				array(
+					'key' => 'event_date_end',
+					'compare' => '>=',
+					'type' => 'numeric',
+					'value' => $date,
+				)
+			),
+		];
+		$query = new \WP_Query($args);
+		return $query->get_posts();
 	}
 
 }
