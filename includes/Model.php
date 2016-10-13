@@ -118,6 +118,7 @@ class Model
 			// day of the week label
 			$day_data['dow'] = $week[$daycntr];
 			if ($daycntr == 6) {
+				$day_data['weekend'] = true;
 				$daycntr = 0;
 			} else {
 				$daycntr++;
