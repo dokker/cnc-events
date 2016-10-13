@@ -46,7 +46,7 @@ class Controller
 	}
 
 	public function modify_events_archive_query( $query ) {
-		if ( is_post_type_archive('event') && is_main_query() ) {
+		if ( is_post_type_archive('event') && is_main_query() && !is_admin() ) {
 			set_query_var( 'orderby', 'meta_value_num' );
 			set_query_var( 'order', 'ASC' );
 	        set_query_var( 'meta_key', 'event_date' );
