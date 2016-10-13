@@ -25,7 +25,7 @@ class Controller
 		if (true) {
 			wp_register_script('cnc-events-script', CNC_PROJECT_URL . CNC_DS . 'assets/js/main.js', array('jquery'));
 			wp_enqueue_script('cnc-events-script');
-			wp_register_script('googlemaps', 'https://maps.googleapis.com/maps/api/js?v=3.exp&key=' . $google_maps_api, null, null, true);  
+			wp_register_script('googlemaps', 'https://maps.googleapis.com/maps/api/js?v=3.exp&key=' . $this->google_maps_api, null, null, true);
 			wp_enqueue_script('googlemaps');
 		}
 	}
