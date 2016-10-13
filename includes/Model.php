@@ -53,4 +53,117 @@ class Model
 	{
 		$this->current_date = $date;
 	}
+
+	/**
+	 * Get current year
+	 * @return int A full numeric representation of a year, 4 digits (2003)
+	 */
+	public function thisYear()
+	{
+		$ts = current_time('timestamp');
+		return gmdate('Y', $ts);
+	}
+
+	/**
+	 * Get current month
+	 * @return int Numeric representation of a month, with leading zeros (01 through 12)
+	 */
+	public function thisMonth()
+	{
+		$ts = current_time('timestamp');
+		return gmdate('m', $ts);
+	}
+
+	/**
+	 * Get calendar structure
+	 * @param  int $year  Year in Y format
+	 * @param  int $month Month in m format
+	 * @return array        Array of a month
+	 */
+	public function generateCalendar($year, $month)
+	{
+		global $wp_locale, $wpdb;
+		// current time
+		$unixmonth = mktime( 0, 0 , 0, $month, 1, $year );
+		$ts = current_time( 'timestamp' );
+		$week_begins = (int) get_option( 'start_of_week' );
+		$last_day = date( 't', $unixmonth );
+		$daysinmonth = (int) date( 't', $unixmonth );
+		// caption for calendar
+		$caption = date_i18n('Y F', $unixmonth);
+		// abbrevated day names of the week
+
+		$week = [];
+		for ( $wdcount = 0; $wdcount <= 6; $wdcount++ ) {
+			$dayname = $wp_locale->get_weekday( ( $wdcount + $week_begins ) % 7 );
+			$week[] = $wp_locale->get_weekday_abbrev($dayname);
+		}
+
+		// strarting day of the week
+		(int)$daycntr = calendar_week_mod( date( 'w', $unixmonth ) - $week_begins );
+
+		// calendar data
+		$calendar = [];
+		for ($day= 1; $day<= $daysinmonth; $day++) {
+			$day_actual = date('Ymd', strtotime( "{$year}-{$month}-{$day}"));
+			$day_data = [];
+			$day_data['date'] = $day_actual;
+			// Check for today
+			if ( $day== gmdate( 'j', $ts ) &&
+				$month == gmdate( 'm', $ts ) &&
+				$year == gmdate( 'Y', $ts ) ) {
+				$day_data['today'] = true;
+			}
+
+			// day of the week label
+			$day_data['dow'] = $week[$daycntr];
+			if ($daycntr == 6) {
+				$day_data['weekend'] = true;
+				$daycntr = 0;
+			} else {
+				$daycntr++;
+			}
+
+			// collect events on this day
+			$day_data['events'] = $this->eventsByDate($year . $month . sprintf("%02d", $day));
+
+			$calendar[$day] = $day_data;
+		}
+
+		return $calendar;
+	}
+
+	/**
+	 * Get events on specified date
+	 * @param  int $date Date in Ymd format
+	 * @return array       Event post list
+	 */
+	public function eventsByDate($date)
+	{
+		$args = [
+			'post_type' => 'event',
+			'posts_per_page' => -1,
+			'status' => 'published',
+			'orderby'		=> 'meta_value_num',
+			'order'			=> 'ASC',
+			'meta_query'		=> array(
+				'relation' => 'AND',
+				array(
+					'key' => 'event_date',
+					'compare' => '<=',
+					'type' => 'numeric',
+					'value' => $date,
+					),
+				array(
+					'key' => 'event_date_end',
+					'compare' => '>=',
+					'type' => 'numeric',
+					'value' => $date,
+				)
+			),
+		];
+		$query = new \WP_Query($args);
+		return $query->get_posts();
+	}
+
 }
