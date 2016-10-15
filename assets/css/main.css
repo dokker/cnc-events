@@ -162,3 +162,13 @@ article.event .entry-wrap {
 .prev-month.calendar--pager {
 	padding-left: 20px;
 }
+
+.calendar--details {}
+.calendar--details .calendar--event-day .title,
+.calendar--details .calendar--event-day .date {
+	letter-spacing: 3px;
+	font-size: 1.4em;
+	color: #2b353e;
+	line-height: 1.1em;
+	margin-bottom: 5px;
+}

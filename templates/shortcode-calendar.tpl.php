@@ -11,6 +11,19 @@
 	</li>
 <?php endforeach; ?>
 </ul>
+<div class="calendar--details">
+	<?php foreach($events_calendar as $event_day): ?>
+		<?php if(!empty($event_day['events'])): ?>
+			<div class="calendar--event-day">
+				<?php foreach($event_day['events'] as $event): ?>
+					<p class="date"><?php the_field('event_date', $event->ID); ?></p>
+					<p class="title"><a href="<?php echo get_permalink($event->ID); ?>"><?php echo $event->post_title; ?></a></p>
+					<p><?php echo wp_strip_all_tags($event->post_content); ?></p>
+				<?php endforeach; ?>
+			</div>
+		<?php endif; ?>
+	<?php endforeach; ?>
+</div>
 
 <?php
 var_dump($events_calendar);
