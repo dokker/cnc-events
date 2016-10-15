@@ -90,7 +90,6 @@ article.event .entry-wrap {
 	position: relative;
 	margin: 30px 5px 10px;
 	padding: 0;
-	cursor: pointer;
 	color: #444;
 
 	width: 45px;
@@ -100,7 +99,8 @@ article.event .entry-wrap {
 	-webkit-border-radius: 45px;
 	border-radius: 45px;
 }
-.cnc-events-calendar .calendar--day:hover {
+.cnc-events-calendar .calendar--day.event:hover {
+	border: 2px solid #00b1bb;
 	background: #00b1bb;
 	color: #fff;
 }
@@ -123,6 +123,7 @@ article.event .entry-wrap {
 }
 
 .cnc-events-calendar .event {
+	cursor: pointer;
 	border: 2px solid #444;
 }
 .cnc-events-calendar .weekend {
