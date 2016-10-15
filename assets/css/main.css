@@ -76,7 +76,10 @@ article.event .entry-wrap {
 	height: 400px;
 }
 
-.cnc-events-calendar {
+
+/* Events Calendar */
+
+.cnc-events-calendar ul {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
@@ -85,20 +88,87 @@ article.event .entry-wrap {
 	display: inline-block;
 	text-align: center;
 	position: relative;
+	margin: 30px 5px 10px;
+	padding: 0;
+	color: #444;
 
-	width: 50px;
-	height: 50px;
-	border: 2px solid #555;
-	-moz-border-radius: 50px;
-	-webkit-border-radius: 50px;
-	border-radius: 50px;
+	width: 45px;
+	height: 45px;
+	border: 2px solid transparent;
+	-moz-border-radius: 45px;
+	-webkit-border-radius: 45px;
+	border-radius: 45px;
+}
+.cnc-events-calendar .calendar--day.event:hover {
+	border: 2px solid #00b1bb;
+	background: #00b1bb;
+	color: #fff;
 }
 
 .dayname {
 	position: absolute;
+	left: 0;
+	right: 0;
+	top: -26px;
+	margin: 0 auto;
+	color: #00b1bb;
+	text-transform: uppercase;
+	font-size: 0.8em;
 }
 .daynum {
 	display: inline;
-	line-height: 50px;
+	line-height: 45px;
 	vertical-align: middle;
+	font-size: 26px;
+}
+
+.cnc-events-calendar .event {
+	cursor: pointer;
+	border: 2px solid #444;
+}
+.cnc-events-calendar .weekend {
+	color: #c44;
+}
+
+.cnc-events-calendar .calendar--title {
+	text-align: center;
+	font-weight: normal;
+	color: #9fc8c4;
+	margin-bottom: 20px;
+}
+.cnc-events-calendar .calendar--title .active,
+.cnc-events-calendar .calendar--title .separator {
+	font-size: 1.3em;
+	color: #00b1bb;
+}
+
+.calendar-text, .locations-text {
+	cursor: pointer;
+}
+
+.calendar--date {
+	text-transform: uppercase;
+	text-align: center;
+	font-size: 24px;
+}
+
+.calendar--pager {
+	display: inline-block;
+	cursor: pointer;
+}
+.next-month.calendar--pager {
+	padding-right: 20px;
+}
+.prev-month.calendar--pager {
+	padding-left: 20px;
+}
+
+.calendar--details {}
+.calendar--details .calendar--event-day .title,
+.calendar--details .calendar--event-day .date {
+	letter-spacing: 3px;
+	font-size: 1.4em;
+	color: #2b353e;
+	line-height: 1.1em;
+	margin-bottom: 5px;
 }
