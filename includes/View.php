@@ -144,6 +144,7 @@ class View {
 	 */
 	public function shortcodeCalendar()
 	{
+		wp_enqueue_script('cnc-events-calendar');
 	    $model = new \cncEV\Model();
 	    $calendar = $model->generateCalendar(2016, 10);
 
