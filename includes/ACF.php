@@ -27,7 +27,7 @@ class ACF {
 						'id' => '',
 					),
 					'display_format' => 'Y.m.d. H:i',
-					'return_format' => 'Y.m.d. H:i',
+					'return_format' => 'Y.m.d.',
 					'first_day' => 1,
 				),
 				array (
@@ -44,7 +44,7 @@ class ACF {
 						'id' => '',
 					),
 					'display_format' => 'Y.m.d. H:i',
-					'return_format' => 'Y.m.d. H:i',
+					'return_format' => 'Y.m.d.',
 					'first_day' => 1,
 				),
 			),
@@ -53,7 +53,7 @@ class ACF {
 					array (
 						'param' => 'post_type',
 						'operator' => '==',
-						'value' => 'post',
+						'value' => 'event',
 					),
 				),
 			),
