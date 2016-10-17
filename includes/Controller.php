@@ -48,10 +48,11 @@ class Controller
 
 	public function modify_events_archive_query( $query ) {
 		if ( is_post_type_archive('event') && is_main_query() && !is_admin() ) {
-			set_query_var( 'orderby', 'meta_value_num' );
+			set_query_var( 'orderby', 'meta_value' );
 			set_query_var( 'order', 'ASC' );
+			set_query_var( 'meta_type', 'DATE');
 	        set_query_var( 'meta_key', 'event_date_start' );
-	        set_query_var( 'meta_value', $this->view->get_current_date('Ymd') );
+	        set_query_var( 'meta_value', $this->view->get_current_date('Y-m-d') . ' 00:00:00' );
 	        set_query_var( 'meta_compare', '>=' );
 	    }
 	}

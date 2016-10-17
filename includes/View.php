@@ -69,9 +69,9 @@ class View {
 	 * @param  string $format    Output date format
 	 * @return string            Formatted date
 	 */
-	public function format_date_field($datefield, $format = 'Y.m.d')
+	public function format_date_field($datefield, $format = 'Y.m.d.')
 	{
-	  $format_in = 'Ymd'; // the format your value is saved in (set in the field options)
+	  $format_in = 'Y-m-d H:i:s'; // the format your value is saved in (set in the field options)
 	  $format_out = $format; // the format you want to end up with
 
 	  $date = \DateTime::createFromFormat($format_in, $datefield);
@@ -100,7 +100,7 @@ class View {
 	 * @param string $format Date format to return
 	 * @return string Formatted date
 	 */
-	public function get_current_date($format = 'Ymd')
+	public function get_current_date($format = 'Y-m-d')
 	{
 		$date = new \DateTime();
 		return $date->format($format);
@@ -131,7 +131,7 @@ class View {
 	    ), $args);
 
 	    $model = new \cncEV\Model();
-	    $model->set_current_date($this->get_current_date('Ymd'));
+	    $model->set_current_date($this->get_current_date('Y-m-d') . ' H:i:s');
 	    $events = $model->getLatestEvents($atts['num']);
 	    $this->assign('events_query', $events);
 

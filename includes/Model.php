@@ -19,10 +19,10 @@ class Model
 	public function is_before_today($datefield)
 	{
 		if (strlen($datefield) == 8) {
-		  $format = 'Ymd';
+		  $format = 'Y-m-d H:i:s';
 		  $stored_date = \DateTime::createFromFormat($format, $datefield);
 		  $today = new \DateTime();
-		  if (intval($stored_date->format($format)) < intval($today->format($format))) {
+		  if ($stored_date->format($format) < $today->format('Y-m-d') . ' 00:00:00') {
 		    return true;
 		  } else {
 		    return false;
@@ -38,7 +38,8 @@ class Model
 			'meta_key' => 'event_date_start',
 			'meta_value' => $this->current_date,
 			'meta_compare' => '>=',
-			'orderby' => 'meta_value_num',
+			'meta_type'	=> 'DATETIME',
+			'orderby' => 'meta_value',
 			'order' => 'ASC',
 		];
 		$query = new \WP_Query($args);
@@ -125,7 +126,7 @@ class Model
 			}
 
 			// collect events on this day
-			$day_data['events'] = $this->eventsByDate($year . $month . sprintf("%02d", $day));
+			$day_data['events'] = $this->eventsByDate($year . '-' . $month . '-' . sprintf("%02d", $day) . ' 00:00:00');
 
 			$calendar[$day] = $day_data;
 		}
@@ -135,7 +136,7 @@ class Model
 
 	/**
 	 * Get events on specified date
-	 * @param  int $date Date in Ymd format
+	 * @param  int $date Date in 'Y-m-d H:i:s' format
 	 * @return array       Event post list
 	 */
 	public function eventsByDate($date)
@@ -144,23 +145,25 @@ class Model
 			'post_type' => 'event',
 			'posts_per_page' => -1,
 			'status' => 'published',
-			'orderby'		=> 'meta_value_num',
-			'order'			=> 'ASC',
 			'meta_query'		=> array(
 				'relation' => 'AND',
 				array(
 					'key' => 'event_date_start',
 					'compare' => '<=',
-					'type' => 'numeric',
+					'type' => 'DATETIME',
 					'value' => $date,
 					),
 				array(
 					'key' => 'event_date_end',
 					'compare' => '>=',
-					'type' => 'numeric',
+					'type' => 'DATETIME',
 					'value' => $date,
 				)
 			),
+			'order'			=> 'ASC',
+			'orderby'		=> 'meta_value',
+			'meta_key'		=> 'event_date_start',
+			'meta_type'		=> 'DATE',
 		];
 		$query = new \WP_Query($args);
 		return $query->get_posts();
