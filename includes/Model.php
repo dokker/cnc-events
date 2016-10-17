@@ -35,7 +35,7 @@ class Model
 		$args = [
 			'post_type' => 'event',
 			'posts_per_page' => $num,
-			'meta_key' => 'event_date',
+			'meta_key' => 'event_date_start',
 			'meta_value' => $this->current_date,
 			'meta_compare' => '>=',
 			'orderby' => 'meta_value_num',
@@ -149,7 +149,7 @@ class Model
 			'meta_query'		=> array(
 				'relation' => 'AND',
 				array(
-					'key' => 'event_date',
+					'key' => 'event_date_start',
 					'compare' => '<=',
 					'type' => 'numeric',
 					'value' => $date,

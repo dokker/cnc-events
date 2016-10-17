@@ -66,7 +66,7 @@ add_filter( 'single_template', '__cnc_events_single_template' );
 
 function __cnc_change_sort_order($query){
     if(is_post_type_archive('event')) {
-    	$query->set('meta_key', 'event_date');
+    	$query->set('meta_key', 'event_date_start');
     	$query->set('order', 'DESC');
     	$query->set('orderby', 'meta_value_num');
     }
