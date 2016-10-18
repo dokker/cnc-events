@@ -163,7 +163,13 @@ article.event .entry-wrap {
 	padding-left: 20px;
 }
 
-.calendar--details {}
+.calendar--details {
+	margin: 40px auto 0;
+	width: 85%;
+}
+.calendar--details .calendar--event-day {
+	display: none;
+}
 .calendar--details .calendar--event-day .title,
 .calendar--details .calendar--event-day .date {
 	letter-spacing: 3px;
