@@ -12,7 +12,7 @@
 	function show_day_event(daynum) {
 		$('.calendar--details *[data-daynum="' + daynum + '"]').show(0, function() {
 			$scrollTarget = $('.calendar--details');
-			scrollToElement($scrollTarget, 500, 200);
+			scrollToElement($scrollTarget, 500, 300);
 		});
 	}
 	$(".cnc-events-calendar .calendar--day").click(function() {

@@ -167,14 +167,21 @@ article.event .entry-wrap {
 	margin: 40px auto 0;
 	width: 85%;
 }
+.calendar--details li {
+	margin: 0 0 30px;
+}
+
 .calendar--details .calendar--event-day {
 	display: none;
 }
 .calendar--details .calendar--event-day .title,
 .calendar--details .calendar--event-day .date {
 	letter-spacing: 3px;
-	font-size: 1.4em;
+	font-size: 1.7em;
 	color: #2b353e;
 	line-height: 1.1em;
 	margin-bottom: 5px;
+}
+.calendar--details .calendar--event-day .date {
+	font-size: 1.1em;
 }
