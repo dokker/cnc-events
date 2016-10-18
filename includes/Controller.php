@@ -16,6 +16,8 @@ class Controller
 		add_action('wp_enqueue_scripts', [$this, 'registerStyles']);
 		add_filter('acf/fields/google_map/api', [$this, 'googleMapAPI']);
 		add_action('pre_get_posts', [$this, 'modify_events_archive_query']);
+		add_action('wp_ajax_get_calendar_month', [$this, 'ajax_get_calendar_month']);
+		add_action('wp_ajax_nopriv_get_calendar_month', [$this, 'ajax_get_calendar_month']);
 	}
 
 	/**
@@ -55,5 +57,14 @@ class Controller
 	        set_query_var( 'meta_value', $this->view->get_current_date('Y-m-d') . ' 00:00:00' );
 	        set_query_var( 'meta_compare', '>=' );
 	    }
+	}
+
+	public function ajax_get_calendar_month() {
+		check_ajax_referer('calendar_nonce');
+		(int) $year = $_REQUEST['year'];
+		(int) $month = $_REQUEST['month'];
+		$calendar_data = $this->model->generateCalendar($year, sprintf("%02d", $month));
+		wp_send_json($calendar_data);
+		wp_die();
 	}
 }

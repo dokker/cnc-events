@@ -105,6 +105,9 @@ class Model
 
 		// calendar data
 		$calendar = [];
+		// generate current date label
+		$calendar['date_label'] = date_i18n('Y F', mktime( 0, 0 , 0, $month, 1, $year ));
+		$calendar['days'] = [];
 		for ($day= 1; $day<= $daysinmonth; $day++) {
 			$day_actual = date('Ymd', strtotime( "{$year}-{$month}-{$day}"));
 			$day_data = [];
@@ -128,7 +131,7 @@ class Model
 			// collect events on this day
 			$day_data['events'] = $this->eventsByDate($year . '-' . $month . '-' . sprintf("%02d", $day) . ' 00:00:00');
 
-			$calendar[$day] = $day_data;
+			$calendar['days'][$day] = $day_data;
 		}
 
 		return $calendar;

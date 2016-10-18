@@ -145,8 +145,17 @@ class View {
 	public function shortcodeCalendar()
 	{
 		wp_enqueue_script('cnc-events-calendar');
-	    $model = new \cncEV\Model();
-	    $calendar = $model->generateCalendar(2016, 10);
+		$year = date('Y', time());
+		$month = date('m', time());
+		wp_localize_script( 'cnc-events-calendar', 'cnc_cal_ajax_obj', array(
+			'ajax_url' => admin_url( 'admin-ajax.php' ),
+		    'nonce'    => wp_create_nonce('calendar_nonce'),
+		    'year'		=> $year,
+		    'month'		=> $month,
+	    ) );
+
+		$model = new \cncEV\Model();
+	    $calendar = $model->generateCalendar($year, $month);
 
 	    $this->assign('events_calendar', $calendar);
 

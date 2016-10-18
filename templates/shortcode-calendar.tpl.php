@@ -2,9 +2,9 @@
 <h3 class="calendar--title">
 	<span class="calendar-text active">Naptár</span> <span class="separator">/</span> <span class="locations-text">Helyszínek</span>
 </h3>
-<p class="calendar--date"><span class="next-month calendar--pager"><</span><span class="calendar-date-label"><?php echo date_i18n('Y F', time()); ?></span><span class="prev-month calendar--pager">></span></p>
+<p class="calendar--date"><span class="prev-month calendar--pager"><</span><span class="calendar-date-label"><?php echo $events_calendar['date_label']; ?></span><span class="next-month calendar--pager">></span></p>
 <ul class="cnc-events-calendar">
-<?php foreach($events_calendar as $daynum => $day): ?>
+<?php foreach($events_calendar['days'] as $daynum => $day): ?>
 	<li data-daynum="day-<?php echo $daynum; ?>"
 		class="calendar--day<?php echo isset($day['today']) ? ' today' : ''; ?>
 		<?php echo isset($day['weekend']) ? ' weekend' : ''; ?>
@@ -15,7 +15,7 @@
 <?php endforeach; ?>
 </ul>
 <div class="calendar--details">
-	<?php foreach($events_calendar as $daynum => $event_day): ?>
+	<?php foreach($events_calendar['days'] as $daynum => $event_day): ?>
 		<?php if(!empty($event_day['events'])): ?>
 			<ul data-daynum="day-<?php echo $daynum; ?>" class="calendar--event-day">
 				<?php foreach($event_day['events'] as $event): ?>
@@ -30,3 +30,4 @@
 	<?php endforeach; ?>
 </div><!-- .calendar--details -->
 </div><!-- .cnc-events-calendar -->
+<?php var_dump($events_calendar);
