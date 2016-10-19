@@ -25,15 +25,39 @@
 		}
 	});
 
+	function loader_start() {
+		$('.calendar--overlay').fadeTo("default", 0.9);
+	}
+
+	function loader_stop() {
+		$('.calendar--overlay').fadeOut("default");
+	}
+
+	function render_calendar(days) {
+
+	}
+
+	function handle_month_change(data) {
+		console.log(data);
+		$('.cnc-events-calendar .calendar-date-label').text(data.date_label);
+		cnc_cal_ajax_obj.year = data.year_new;
+		cnc_cal_ajax_obj.month = data.month_new;
+		render_calendar(data.days);
+	}
+
 	function get_month_data(year, month) {
+		loader_start();
         $.post(cnc_cal_ajax_obj.ajax_url, {         //POST request
            _ajax_nonce: cnc_cal_ajax_obj.nonce,     //nonce
             action: "get_calendar_month",            //action
             year: year,
             month: month
         }, function(data) {                    //callback
-        	console.log(data);
-        });
+        	if (data.success == true) {
+        		loader_stop();
+	        	handle_month_change(data);
+        	}
+        }, 'json');
 	}
 
 	$('.next-month.calendar--pager').click(function() {

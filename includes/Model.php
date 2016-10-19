@@ -134,6 +134,9 @@ class Model
 			$calendar['days'][$day] = $day_data;
 		}
 
+		$calendar['year_new'] = $year;
+		$calendar['month_new'] = $month;
+		$calendar['success'] = true;
 		return $calendar;
 	}
 

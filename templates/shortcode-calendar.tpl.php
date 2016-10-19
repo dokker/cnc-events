@@ -29,5 +29,6 @@
 		<?php endif; ?>
 	<?php endforeach; ?>
 </div><!-- .calendar--details -->
+<div class="calendar--overlay"></div>
 </div><!-- .cnc-events-calendar -->
 <?php var_dump($events_calendar);
