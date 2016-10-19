@@ -33,12 +33,58 @@
 		$('.calendar--overlay').fadeOut("default");
 	}
 
-	function render_calendar(days) {
+	function render_calendar_day(day) {
+		// body...
+	}
 
+	function render_calendar(days) {
+		var $calendar = $('.calendar--days');
+		$calendar.empty();
+		var $calendar_details = $('.calendar--details');
+		$calendar_details.empty();
+		$.each(days, function(num, day) {
+			console.log(day, num);
+
+			// Work with calendar
+			$day= $('<li class="calendar--day"></li>');
+			$day.attr('data-daynum', num);
+			if (day.today == true) {
+				$day.addClass('today');
+			}
+			if (day.weekend == true) {
+				$day.addClass('weekend');
+			}
+			if (day.events.length > 0) {
+				$day.addClass('event');
+			}
+			$day.append('<span class="dayname">' + day.dow + '</span>');
+			$day.append('<span class="daynum">' + num + '</span>');
+			$calendar.append($day);
+
+			// Work with calendar details
+			$event_day = $('<ul class="calendar--event-day"></ul>');
+			$event_day.attr('data-daynum', num);
+			$calendar_details.append($event_day);
+
+/*
+	<?php foreach($events_calendar['days'] as $daynum => $event_day): ?>
+		<?php if(!empty($event_day['events'])): ?>
+			<ul data-daynum="<?php echo $daynum; ?>" class="calendar--event-day">
+				<?php foreach($event_day['events'] as $event): ?>
+					<li>
+					<p class="date"><?php the_field('event_date_start', $event->ID); ?> - <?php the_field('event_date_end', $event->ID); ?></p>
+					<p class="title"><a href="<?php echo get_permalink($event->ID); ?>"><?php echo $event->post_title; ?></a></p>
+					<p><?php echo wp_strip_all_tags($event->post_content); ?></p>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+		<?php endif; ?>
+	<?php endforeach; ?>
+*/
+		});
 	}
 
 	function handle_month_change(data) {
-		console.log(data);
 		$('.cnc-events-calendar .calendar-date-label').text(data.date_label);
 		cnc_cal_ajax_obj.year = data.year_new;
 		cnc_cal_ajax_obj.month = data.month_new;
