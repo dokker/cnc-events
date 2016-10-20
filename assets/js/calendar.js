@@ -15,7 +15,7 @@
 			scrollToElement($scrollTarget, 500, 300);
 		});
 	}
-	$(".cnc-events-calendar .calendar--day").click(function() {
+	$(".cnc-events-calendar").on('click', '.calendar--day', function() {
 		if($(this).hasClass('active') == false) {
 			$('.cnc-events-calendar .calendar--day').removeClass('active');
 			$(this).addClass('active');
