@@ -129,7 +129,8 @@ class Model
 			}
 
 			// collect events on this day
-			$day_data['events'] = $this->eventsByDate($year . '-' . $month . '-' . sprintf("%02d", $day) . ' 00:00:00');
+			$events = $this->eventsByDate($year . '-' . $month . '-' . sprintf("%02d", $day) . ' 00:00:00');
+			$day_data['events'] = $this->injectEventsData($events);
 
 			$calendar['days'][$day] = $day_data;
 		}
@@ -173,6 +174,65 @@ class Model
 		];
 		$query = new \WP_Query($args);
 		return $query->get_posts();
+	}
+
+	/**
+	 * Add date fields and excerpt to events query result
+	 * @param  array $events Events query result
+	 * @return array         Modified events list
+	 */
+	private function injectEventsData($events)
+	{
+		foreach ($events as $key=>$event) {
+			$events[$key]->c_date_start = get_field('event_date_start', $event->ID);
+			$events[$key]->c_date_end = get_field('event_date_end', $event->ID);
+			$events[$key]->c_permalink = get_permalink($event->ID);
+			$events[$key]->c_excerpt = $this->createExcerpt($event->post_content);
+		}
+		return $events;
+	}
+
+
+    /**
+     * Shorten string to given length
+     *
+     * @param {string} $text String to shorten
+     * @param {int} $length Shorten length
+     *
+     * @return {string} Shortened string
+     */
+    public static function strToExcerpt($string, $int) {
+    	$str_excerpt = preg_replace('/\s+?(\S+)?$/', '', substr($string, 0, $int));
+    	return $str_excerpt;
+    }
+
+    /**
+     * Shorten string to given length with dots
+     *
+     * @param {string} $text String to shorten
+     * @param {int} $length Shorten length
+     *
+     * @return {string} Shortened string
+     */
+    public static function strToExcerptDots($string, $int) {
+    	if (strlen($string) > $int) {
+    		$str_excerpt = $this->str_to_excerpt($string, $int);
+    		$str_excerpt .= "...";
+    	} else {
+    		$str_excerpt = $string;
+    	}
+    	return $str_excerpt;
+    }
+
+	/**
+	 * Create simple excerpt from given content
+	 * @param  string $content Mixed content string
+	 * @return string          Simple excerpt
+	 */
+	private function createExcerpt($content)
+	{
+		$excerpt = $this->strToExcerptDots(wp_strip_all_tags($content), 200);
+		return $excerpt;
 	}
 
 }
