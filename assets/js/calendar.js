@@ -43,7 +43,6 @@
 		var $calendar_details = $('.calendar--details');
 		$calendar_details.empty();
 		$.each(days, function(num, day) {
-			console.log(day, num);
 
 			// Work with calendar
 			$day= $('<li class="calendar--day"></li>');
