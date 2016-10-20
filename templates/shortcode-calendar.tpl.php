@@ -20,9 +20,9 @@
 			<ul data-daynum="<?php echo $daynum; ?>" class="calendar--event-day">
 				<?php foreach($event_day['events'] as $event): ?>
 					<li>
-					<p class="date"><?php the_field('event_date_start', $event->ID); ?> - <?php the_field('event_date_end', $event->ID); ?></p>
-					<p class="title"><a href="<?php echo get_permalink($event->ID); ?>"><?php echo $event->post_title; ?></a></p>
-					<p><?php echo wp_strip_all_tags($event->post_content); ?></p>
+					<p class="date"><?php echo $event->c_date_start; ?> - <?php echo $event->c_date_end; ?></p>
+					<p class="title"><a href="<?php echo $event->c_permalink; ?>"><?php echo $event->post_title; ?></a></p>
+					<p><?php echo $event->c_excerpt; ?></p>
 					</li>
 				<?php endforeach; ?>
 			</ul>
