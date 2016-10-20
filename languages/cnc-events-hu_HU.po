@@ -1,0 +1,85 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: CNC Event plugin\n"
+"POT-Creation-Date: 2016-07-13 15:48+0200\n"
+"PO-Revision-Date: 2016-07-13 15:49+0200\n"
+"Last-Translator: docker <dock3r@gmail.com>\n"
+"Language-Team: colorandcode <denes@colorandcode.hu>\n"
+"Language: hu_HU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e;_x:1,2c\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: cnc-events.php:40
+msgid "Event"
+msgstr "Esemény"
+
+#: cnc-events.php:40
+msgid "Events"
+msgstr "Események"
+
+#: cnc-events.php:41
+msgctxt "events archive slug"
+msgid "events"
+msgstr "esemenyek"
+
+#: includes/ContentType.php:52 includes/ContentType.php:53
+#, php-format
+msgid "Add new %s"
+msgstr "Új %s hozzáadása"
+
+#: includes/ContentType.php:54
+msgid "Edit"
+msgstr "Szerkesztés"
+
+#: includes/ContentType.php:55
+#, php-format
+msgid "Edit %s"
+msgstr "%s szerkesztése"
+
+#: includes/ContentType.php:56
+#, php-format
+msgid "New %s"
+msgstr "Új %s"
+
+#: includes/ContentType.php:57
+#, php-format
+msgid "View %s Page"
+msgstr "%s oldal megtekintése"
+
+#: includes/ContentType.php:58
+#, php-format
+msgid "View %s"
+msgstr "%s megtekintése"
+
+#: includes/ContentType.php:59
+#, php-format
+msgid "Search %s"
+msgstr "%s keresése"
+
+#: includes/ContentType.php:60
+#, php-format
+msgid "No matching %s found"
+msgstr "Nem található %s"
+
+#: includes/ContentType.php:61
+#, php-format
+msgid "No %s found in Trash"
+msgstr "Nincs %s a lomtárban"
+
+#: includes/ContentType.php:62
+#, php-format
+msgid "Parent %s"
+msgstr "Szülő %s"
+
+#: templates/archive-events.php:6
+msgid "Sorry, no results were found."
+msgstr "Sajnáljuk, nincs eremény."
+
+#~ msgid "Read more"
+#~ msgstr "Tovább"

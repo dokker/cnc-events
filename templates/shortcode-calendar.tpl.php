@@ -1,6 +1,6 @@
 <div class="cnc-events-calendar">
 <h3 class="calendar--title">
-	<span class="calendar-text active">Naptár</span> <span class="separator">/</span> <span class="locations-text">Helyszínek</span>
+	<span class="calendar-text active">Naptár</span>
 </h3>
 <p class="calendar--date"><span class="prev-month calendar--pager"><</span><span class="calendar-date-label"><?php echo $events_calendar['date_label']; ?></span><span class="next-month calendar--pager">></span></p>
 <ul class="calendar--days">
