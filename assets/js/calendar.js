@@ -42,7 +42,8 @@
 	 * Start the AJAX loader
 	 */
 	function loader_start() {
-		$('.calendar--overlay').fadeTo("default", 0.9);
+		$('.calendar--overlay').fadeTo("default", 1);
+		$('.cnc-events-calendar').fadeTo("default", 0.2);
 	}
 
 	/**
@@ -50,6 +51,7 @@
 	 */
 	function loader_stop() {
 		$('.calendar--overlay').fadeOut("default");
+		$('.cnc-events-calendar').fadeTo("default", 1);
 	}
 
 	/**

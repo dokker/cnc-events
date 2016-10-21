@@ -197,6 +197,6 @@ article.event .entry-wrap {
 	left: 0;
 	right: 0;
 	opacity: 0;
-	background: #fff url(../images/ajax-loader.gif) 50% 50% no-repeat;
+	background: transparent url(../images/ajax-loader.gif) 50% 50% no-repeat;
 	display: none;
 }
