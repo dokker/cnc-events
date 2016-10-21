@@ -97,7 +97,9 @@ class Model
 		$week = [];
 		for ( $wdcount = 0; $wdcount <= 6; $wdcount++ ) {
 			$dayname = $wp_locale->get_weekday( ( $wdcount + $week_begins ) % 7 );
-			$week[] = $wp_locale->get_weekday_abbrev($dayname);
+			$weekday_abbr = $wp_locale->get_weekday_abbrev($dayname);
+			// get the first letter only
+			$week[] = $weekday_abbr[0];
 		}
 
 		// strarting day of the week
