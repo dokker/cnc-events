@@ -83,63 +83,66 @@ class Model
 	 */
 	public function generateCalendar($year, $month)
 	{
-		global $wp_locale, $wpdb;
-		// current time
-		$unixmonth = mktime( 0, 0 , 0, $month, 1, $year );
-		$ts = current_time( 'timestamp' );
-		$week_begins = (int) get_option( 'start_of_week' );
-		$last_day = date( 't', $unixmonth );
-		$daysinmonth = (int) date( 't', $unixmonth );
-		// caption for calendar
-		$caption = date_i18n('Y F', $unixmonth);
-		// abbrevated day names of the week
+		if (false === ($calendar = get_transient('cnc_events_cal_'.$year.$month))) {
+			global $wp_locale, $wpdb;
+			// current time
+			$unixmonth = mktime( 0, 0 , 0, $month, 1, $year );
+			$ts = current_time( 'timestamp' );
+			$week_begins = (int) get_option( 'start_of_week' );
+			$last_day = date( 't', $unixmonth );
+			$daysinmonth = (int) date( 't', $unixmonth );
+			// caption for calendar
+			$caption = date_i18n('Y F', $unixmonth);
+			// abbrevated day names of the week
 
-		$week = [];
-		for ( $wdcount = 0; $wdcount <= 6; $wdcount++ ) {
-			$dayname = $wp_locale->get_weekday( ( $wdcount + $week_begins ) % 7 );
-			$weekday_abbr = $wp_locale->get_weekday_abbrev($dayname);
-			// get the first letter only
-			$week[] = $weekday_abbr[0];
-		}
-
-		// strarting day of the week
-		(int)$daycntr = calendar_week_mod( date( 'w', $unixmonth ) - $week_begins );
-
-		// calendar data
-		$calendar = [];
-		// generate current date label
-		$calendar['date_label'] = date_i18n('Y F', mktime( 0, 0 , 0, $month, 1, $year ));
-		$calendar['days'] = [];
-		for ($day= 1; $day<= $daysinmonth; $day++) {
-			$day_actual = date('Ymd', strtotime( "{$year}-{$month}-{$day}"));
-			$day_data = [];
-			$day_data['date'] = $day_actual;
-			// Check for today
-			if ( $day== gmdate( 'j', $ts ) &&
-				$month == gmdate( 'm', $ts ) &&
-				$year == gmdate( 'Y', $ts ) ) {
-				$day_data['today'] = true;
+			$week = [];
+			for ( $wdcount = 0; $wdcount <= 6; $wdcount++ ) {
+				$dayname = $wp_locale->get_weekday( ( $wdcount + $week_begins ) % 7 );
+				$weekday_abbr = $wp_locale->get_weekday_abbrev($dayname);
+				// get the first letter only
+				$week[] = $weekday_abbr[0];
 			}
 
-			// day of the week label
-			$day_data['dow'] = $week[$daycntr];
-			if ($daycntr == 6) {
-				$day_data['weekend'] = true;
-				$daycntr = 0;
-			} else {
-				$daycntr++;
+			// strarting day of the week
+			(int)$daycntr = calendar_week_mod( date( 'w', $unixmonth ) - $week_begins );
+
+			// calendar data
+			$calendar = [];
+			// generate current date label
+			$calendar['date_label'] = date_i18n('Y F', mktime( 0, 0 , 0, $month, 1, $year ));
+			$calendar['days'] = [];
+			for ($day= 1; $day<= $daysinmonth; $day++) {
+				$day_actual = date('Ymd', strtotime( "{$year}-{$month}-{$day}"));
+				$day_data = [];
+				$day_data['date'] = $day_actual;
+				// Check for today
+				if ( $day== gmdate( 'j', $ts ) &&
+					$month == gmdate( 'm', $ts ) &&
+					$year == gmdate( 'Y', $ts ) ) {
+					$day_data['today'] = true;
+				}
+
+				// day of the week label
+				$day_data['dow'] = $week[$daycntr];
+				if ($daycntr == 6) {
+					$day_data['weekend'] = true;
+					$daycntr = 0;
+				} else {
+					$daycntr++;
+				}
+
+				// collect events on this day
+				$events = $this->eventsByDate($year . '-' . $month . '-' . sprintf("%02d", $day) . ' 00:00:00');
+				$day_data['events'] = $this->injectEventsData($events);
+
+				$calendar['days'][$day] = $day_data;
 			}
 
-			// collect events on this day
-			$events = $this->eventsByDate($year . '-' . $month . '-' . sprintf("%02d", $day) . ' 00:00:00');
-			$day_data['events'] = $this->injectEventsData($events);
-
-			$calendar['days'][$day] = $day_data;
+			$calendar['year_new'] = $year;
+			$calendar['month_new'] = $month;
+			$calendar['success'] = true;
+			set_transient('cnc_events_cal_'.$year.$month, $calendar, 15 * MINUTE_IN_SECONDS);
 		}
-
-		$calendar['year_new'] = $year;
-		$calendar['month_new'] = $month;
-		$calendar['success'] = true;
 		return $calendar;
 	}
 
