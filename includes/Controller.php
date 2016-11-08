@@ -18,6 +18,9 @@ class Controller
 		add_action('pre_get_posts', [$this, 'modify_events_archive_query']);
 		add_action('wp_ajax_get_calendar_month', [$this, 'ajax_get_calendar_month']);
 		add_action('wp_ajax_nopriv_get_calendar_month', [$this, 'ajax_get_calendar_month']);
+		// Register custom event list column
+		add_filter( 'manage_event_posts_columns', [$this, 'wpcolumn_add_column'], 5 );
+		add_action( 'manage_event_posts_custom_column', [$this, 'wpcolumn_column_content'], 5, 2 );
 	}
 
 	/**
@@ -66,5 +69,34 @@ class Controller
 		$calendar_data = $this->model->generateCalendar($year, sprintf("%02d", $month));
 		wp_send_json($calendar_data);
 		wp_die();
+	}
+
+	/**
+	 * Add new custom column before the last column
+	 * @param  array $columns WP list column list
+	 * @return array          Appended column list
+	 */
+	public function wpcolumn_add_column( $columns ) {
+		$ccolumns = [];
+		end($columns);
+		$lastkey = key($columns);
+		foreach ($columns as $key => $value) {
+			if ($key == $lastkey) {
+				$ccolumns['start_date'] = __('Start date', 'cnc-events');
+			}
+			$ccolumns[$key] = $value;
+		}
+		return $ccolumns;
+	}
+
+	/**
+	 * Generate customn column content
+	 * @param  string $column Column name
+	 * @param  int $id     Post ID
+	 */
+	public function wpcolumn_column_content( $column, $id ) {
+		if( 'start_date' == $column ) {
+			echo get_field('event_date_start', $id);
+		}
 	}
 }
