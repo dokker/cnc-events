@@ -132,7 +132,7 @@ class Model
 				}
 
 				// collect events on this day
-				$events = $this->eventsByDate($year . '-' . $month . '-' . sprintf("%02d", $day) . ' 00:00:00');
+				$events = $this->eventsByDate($year . '-' . $month . '-' . sprintf("%02d", $day));
 				$day_data['events'] = $this->injectEventsData($events);
 
 				$calendar['days'][$day] = $day_data;
@@ -153,6 +153,8 @@ class Model
 	 */
 	public function eventsByDate($date)
 	{
+		$day_start = $date . ' 00:00:00';
+		$day_end = $date . ' 23:59:59';
 		$args = [
 			'post_type' => 'event',
 			'posts_per_page' => -1,
@@ -161,15 +163,15 @@ class Model
 				'relation' => 'AND',
 				array(
 					'key' => 'event_date_start',
-					'compare' => '<=',
+					'compare' => '<',
 					'type' => 'DATETIME',
-					'value' => $date,
+					'value' => $day_end,
 					),
 				array(
 					'key' => 'event_date_end',
-					'compare' => '>=',
+					'compare' => '>',
 					'type' => 'DATETIME',
-					'value' => $date,
+					'value' => $day_start,
 				)
 			),
 			'order'			=> 'ASC',
