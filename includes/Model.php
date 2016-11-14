@@ -163,13 +163,13 @@ class Model
 				'relation' => 'AND',
 				array(
 					'key' => 'event_date_start',
-					'compare' => '<',
+					'compare' => '<=',
 					'type' => 'DATETIME',
 					'value' => $day_end,
 					),
 				array(
 					'key' => 'event_date_end',
-					'compare' => '>',
+					'compare' => '>=',
 					'type' => 'DATETIME',
 					'value' => $day_start,
 				)
