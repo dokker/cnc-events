@@ -21,6 +21,8 @@ class Controller
 		// Register custom event list column
 		add_filter( 'manage_event_posts_columns', [$this, 'wpcolumn_add_column'], 5 );
 		add_action( 'manage_event_posts_custom_column', [$this, 'wpcolumn_column_content'], 5, 2 );
+		add_action( 'manage_edit-event_sortable_columns', [$this, 'wpcolumn_column_sortable'], 5, 2 );
+		add_action( 'pre_get_posts', [$this, 'wpcolumn_column_orderby'] );
 	}
 
 	/**
@@ -97,6 +99,28 @@ class Controller
 	public function wpcolumn_column_content( $column, $id ) {
 		if( 'start_date' == $column ) {
 			echo get_field('event_date_start', $id);
+		}
+	}
+
+	public function wpcolumn_column_sortable($columns)
+	{
+		$columns['start_date'] = 'start_date';
+
+		return $columns;
+	}
+
+	public function wpcolumn_column_orderby($query)
+	{
+		if(!is_admin()) {
+			return;
+		}
+
+		$orderby = $query->query['orderby'];
+
+		if('start_date' == $orderby) {
+			set_query_var( 'orderby', 'meta_value' );
+			set_query_var( 'meta_type', 'DATE');
+	        set_query_var( 'meta_key', 'event_date_start' );
 		}
 	}
 }
