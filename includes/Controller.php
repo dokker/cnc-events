@@ -102,6 +102,11 @@ class Controller
 		}
 	}
 
+	/**
+	 * Register sortable columns
+	 * @param  array $columns Columns
+	 * @return array          Updated columns
+	 */
 	public function wpcolumn_column_sortable($columns)
 	{
 		$columns['start_date'] = 'start_date';
@@ -109,6 +114,10 @@ class Controller
 		return $columns;
 	}
 
+	/**
+	 * Custom column order callback
+	 * @param  object $query WP query object
+	 */
 	public function wpcolumn_column_orderby($query)
 	{
 		if(!is_admin()) {
