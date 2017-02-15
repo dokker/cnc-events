@@ -208,7 +208,7 @@ class Model
      *
      * @return {string} Shortened string
      */
-    public static function strToExcerpt($string, $int) {
+    public function strToExcerpt($string, $int) {
     	$str_excerpt = preg_replace('/\s+?(\S+)?$/', '', substr($string, 0, $int));
     	return $str_excerpt;
     }
@@ -221,9 +221,9 @@ class Model
      *
      * @return {string} Shortened string
      */
-    public static function strToExcerptDots($string, $int) {
+    public function strToExcerptDots($string, $int) {
     	if (strlen($string) > $int) {
-    		$str_excerpt = $this->str_to_excerpt($string, $int);
+    		$str_excerpt = $this->strToExcerpt($string, $int);
     		$str_excerpt .= "...";
     	} else {
     		$str_excerpt = $string;
