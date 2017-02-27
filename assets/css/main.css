@@ -200,3 +200,7 @@ article.event .entry-wrap {
 	background: transparent url(../images/ajax-loader.gif) 50% 50% no-repeat;
 	display: none;
 }
+
+.related-product-container {
+	margin-top: 20px;
+}
