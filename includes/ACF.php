@@ -84,7 +84,31 @@ class ACF {
 					'zoom' => '',
 					'height' => '',
 					),
+				array (
+					'key' => 'field_58b039bd88490',
+					'label' => 'Kapcsolódó termék',
+					'name' => 'related_product',
+					'type' => 'post_object',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array (
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'post_type' => array (
+						0 => 'product',
+					),
+					'taxonomy' => array (
+						0 => 'product_cat:esemenyek',
+					),
+					'allow_null' => 1,
+					'multiple' => 0,
+					'return_format' => 'object',
+					'ui' => 1,
 				),
+			),
 			'location' => array (
 				array (
 					array (
