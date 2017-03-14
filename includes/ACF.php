@@ -104,6 +104,54 @@ class ACF {
 			'description' => '',
 		));
 
+		acf_add_local_field_group(array (
+			'key' => 'group_58c8066e2168c',
+			'title' => 'General settings',
+			'fields' => array (
+				array (
+					'key' => 'field_58c8067cc004c',
+					'label' => 'Archive style',
+					'name' => 'cnc-event-archive-style',
+					'type' => 'radio',
+					'instructions' => '',
+					'required' => 1,
+					'conditional_logic' => 0,
+					'wrapper' => array (
+						'width' => '',
+						'class' => '',
+						'id' => '',
+						),
+					'choices' => array (
+						'calendar' => 'Calendar',
+						'simple' => 'Simple',
+						),
+					'allow_null' => 0,
+					'other_choice' => 0,
+					'save_other_choice' => 0,
+					'default_value' => 'simple',
+					'layout' => 'vertical',
+					'return_format' => 'value',
+					),
+				),
+			'location' => array (
+				array (
+					array (
+						'param' => 'options_page',
+						'operator' => '==',
+						'value' => 'cnc-events',
+						),
+					),
+				),
+			'menu_order' => 0,
+			'position' => 'normal',
+			'style' => 'default',
+			'label_placement' => 'top',
+			'instruction_placement' => 'label',
+			'hide_on_screen' => '',
+			'active' => 1,
+			'description' => '',
+		));
+
 		endif;
 	}
 }

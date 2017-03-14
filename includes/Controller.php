@@ -23,6 +23,24 @@ class Controller
 		add_action( 'manage_event_posts_custom_column', [$this, 'wpcolumn_column_content'], 5, 2 );
 		add_action( 'manage_edit-event_sortable_columns', [$this, 'wpcolumn_column_sortable'], 5, 2 );
 		add_action( 'pre_get_posts', [$this, 'wpcolumn_column_orderby'] );
+
+		$this->add_option_pages();
+	}
+
+	/**
+	 * Add admin option pages using ACF5
+	 */
+	public function add_option_pages()
+	{
+		if( function_exists('acf_add_options_page') ) {
+			acf_add_options_page(array(
+				'page_title' 	=> __('CnC Events General Settings', 'cnc-events'),
+				'menu_title'	=> __('CnC Events', 'cnc-events'),
+				'menu_slug' 	=> 'cnc-events',
+				'capability'	=> 'edit_posts',
+				'redirect'		=> false
+			));
+		}
 	}
 
 	/**
