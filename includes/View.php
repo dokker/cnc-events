@@ -14,6 +14,7 @@ class View {
 		add_filter('cnc_limit_string', [$this, 'limit_string'], 10, 3);
 
 		add_image_size( 'event-medium', 750, 450, true );
+		add_image_size( 'event-portrait', 554, 674, true );
 
 		add_shortcode('cnc_events_latest', [$this, 'shortcodeLatest']);
 		add_shortcode('cnc_events_calendar', [$this, 'shortcodeCalendar']);
