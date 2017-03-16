@@ -133,6 +133,25 @@ class ACF {
 					'layout' => 'vertical',
 					'return_format' => 'value',
 					),
+				array (
+					'key' => 'field_58ca9b3caeea3',
+					'label' => 'Google Maps API key',
+					'name' => 'cnc-events-gmaps-api',
+					'type' => 'text',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array (
+						'width' => '',
+						'class' => '',
+						'id' => '',
+						),
+					'default_value' => '',
+					'placeholder' => '',
+					'prepend' => '',
+					'append' => '',
+					'maxlength' => '',
+					),
 				),
 			'location' => array (
 				array (

@@ -4,8 +4,8 @@ namespace cncEV;
 class Controller
 {
 
-	private $google_maps_api = 'AIzaSyDzFr49Ko_k2h_Z2Um9DAM-4cTyzImrx88';
-	
+	private $google_maps_api;
+
 	function __construct()
 	{
 		$this->model = new \cncEV\Model();
@@ -25,6 +25,8 @@ class Controller
 		add_action( 'pre_get_posts', [$this, 'wpcolumn_column_orderby'] );
 
 		$this->add_option_pages();
+
+		$this->google_maps_api = get_field(get_field('cnc-events-gmaps-api', 'option'));
 	}
 
 	/**
