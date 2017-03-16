@@ -17,6 +17,7 @@ class View {
 
 		add_shortcode('cnc_events_latest', [$this, 'shortcodeLatest']);
 		add_shortcode('cnc_events_calendar', [$this, 'shortcodeCalendar']);
+		add_shortcode('cnc_events_list', [$this, 'shortcodeEventsList']);
 		add_filter('widget_text', 'do_shortcode');
 	}
 
@@ -160,5 +161,28 @@ class View {
 	    $this->assign('events_calendar', $calendar);
 
 	    return $this->render('shortcode-calendar');
+	}
+
+	public function shortcodeEventsList($args)
+	{
+	    // extract the attributes into variables
+	    $atts = shortcode_atts(array(
+	        'style' => 'minimal',
+	    ), $args);
+
+	    switch ($atts['style']) {
+	    	case 'minimal':
+	    		return $this->render('shortcode-event-list-minimal');
+	    		break;
+	    	case 'simple':
+	    		return $this->render('shortcode-event-list-simple');
+	    		break;
+	    	case 'calendar':
+	    		return $this->render('shortcode-event-list-calendar');
+	    		break;
+	    	default:
+	    		return $this->render('shortcode-event-list-minimal');
+	    		break;
+	    }
 	}
 }
