@@ -195,6 +195,7 @@ class ACF {
 						'id' => '',
 					),
 					'choices' => array (
+						'minimal' => 'Minimal',
 						'calendar' => 'Calendar',
 						'simple' => 'Simple',
 					),
@@ -243,8 +244,8 @@ class ACF {
 						'id' => '',
 					),
 					'choices' => array (
-						0 => 'Show',
-						1 => 'HIde',
+						0 => 'Hide',
+						1 => 'Show',
 					),
 					'allow_null' => 0,
 					'other_choice' => 0,
