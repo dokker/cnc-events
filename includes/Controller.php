@@ -26,7 +26,7 @@ class Controller
 
 		$this->add_option_pages();
 
-		$this->google_maps_api = get_field(get_field('cnc-events-gmaps-api', 'option'));
+		$this->google_maps_api = get_field('cnc-events-gmaps-api', 'option');
 	}
 
 	/**

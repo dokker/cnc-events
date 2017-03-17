@@ -9,7 +9,7 @@
 				</time>
 				<h2 class="entry-title"><a href="<?php the_permalink(); ?>"><?php echo apply_filters('cnc_limit_string', get_the_title(), 70); ?></a></h2>
 				<time class="time">
-					<span><?php echo get_field('event_time'); ?></span>
+					<span><?php echo apply_filters('cnc_format_date_field', get_field('event_date_start', false, false), 'H:i'); ?></span>
 				</time>
 			</header>
 		</div>
