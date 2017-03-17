@@ -248,6 +248,31 @@ class Model
 		return $excerpt;
 	}
 
+	/**
+	 * generate archive query
+	 * @return object        Query object
+	 */
+	public function events_archive_query() {
+		$args = [
+			'post_type' => 'event',
+			'orderby' => 'meta_value',
+			'meta_type' => 'DATE',
+			'meta_key' => 'event_date_start',
+		];
+		if ($this->list_order != 'desc') {
+			$args['order'] = 'ASC';
+		} else {
+			$args['order'] = 'DESC';
+		}
+		if ($this->list_show_past != 1) {
+			$args['meta_value'] = $this->get_current_date('Y-m-d') . ' 00:00:00';
+			$args['meta_compare'] = '>=';
+		}
+
+		$query = new \WP_Query($args);
+		return $query;
+	}
+
 	public function modify_events_archive_query( $query ) {
 		if ( is_post_type_archive('event') && $query->is_main_query() && !is_admin() ) {
 		set_query_var( 'orderby', 'meta_value' );

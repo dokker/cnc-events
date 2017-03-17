@@ -155,6 +155,10 @@ class View {
 
 	public function shortcodeEventsList($args)
 	{
+		$model = new \cncEV\Model();
+		$query = $model->events_archive_query();
+		$this->assign('events_query', $query);
+
 	    // extract the attributes into variables
 	    $atts = shortcode_atts(array(
 	        'style' => 'minimal',
