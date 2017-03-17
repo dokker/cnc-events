@@ -98,17 +98,6 @@ class View {
 	}
 
 	/**
-	 * Get current date formatted in specified format
-	 * @param string $format Date format to return
-	 * @return string Formatted date
-	 */
-	public function get_current_date($format = 'Y-m-d')
-	{
-		$date = new \DateTime();
-		return $date->format($format);
-	}
-
-	/**
 	 * Trim given text to specified length
 	 * @param  string $string   Text to trim
 	 * @param  int $length   Length in characters
@@ -133,7 +122,7 @@ class View {
 	    ), $args);
 
 	    $model = new \cncEV\Model();
-	    $model->set_current_date($this->get_current_date('Y-m-d') . ' H:i:s');
+	    $model->set_current_date($model->get_current_date('Y-m-d') . ' H:i:s');
 	    $events = $model->getLatestEvents($atts['num']);
 	    $this->assign('events_query', $events);
 
@@ -166,6 +155,10 @@ class View {
 
 	public function shortcodeEventsList($args)
 	{
+		$model = new \cncEV\Model();
+		$query = $model->events_archive_query();
+		$this->assign('events_query', $query);
+
 	    // extract the attributes into variables
 	    $atts = shortcode_atts(array(
 	        'style' => 'minimal',

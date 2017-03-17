@@ -1,5 +1,5 @@
 <div class="mk-grid event-listing event-list-simple">
-<?php while (have_posts()) : the_post(); ?>
+<?php while ($events_query->have_posts()) : $events_query->the_post(); ?>
 
 	<article class="mk-col-3-12 col-md-3 col-sm-4 grid-item <?php echo (apply_filters('cnc_is_before_today', get_field('event_date_start', false, false)) ? 'older' : 'actual'); ?> <?php echo join( ' ', get_post_class() ); ?>">
 		<div class="grid-item-inner">
@@ -28,4 +28,5 @@
 
 
 <?php endwhile; ?>
+<?php wp_reset_postdata(); ?>
 </div>

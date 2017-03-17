@@ -5,8 +5,6 @@ class Controller
 {
 
 	private $google_maps_api;
-	private $list_order;
-	private $list_show_past;
 
 	function __construct()
 	{
@@ -17,7 +15,6 @@ class Controller
 		add_action('wp_enqueue_scripts', [$this, 'registerScripts']);
 		add_action('wp_enqueue_scripts', [$this, 'registerStyles']);
 		add_filter('acf/fields/google_map/api', [$this, 'googleMapAPI']);
-		add_action('pre_get_posts', [$this, 'modify_events_archive_query']);
 		add_action('wp_ajax_get_calendar_month', [$this, 'ajax_get_calendar_month']);
 		add_action('wp_ajax_nopriv_get_calendar_month', [$this, 'ajax_get_calendar_month']);
 		// Register custom event list column
@@ -26,25 +23,23 @@ class Controller
 		add_action( 'manage_edit-event_sortable_columns', [$this, 'wpcolumn_column_sortable'], 5, 2 );
 		add_action( 'pre_get_posts', [$this, 'wpcolumn_column_orderby'] );
 
-		$this->add_option_pages();
+		$this->add_options_pages();
 
 		$this->google_maps_api = get_field('cnc-events-gmaps-api', 'option');
-		$this->list_order = get_field('cnc-events-order-method', 'option');
-		$this->list_show_past = get_field('cnc-events-show-past', 'option');
 	}
 
 	/**
 	 * Add admin option pages using ACF5
 	 */
-	public function add_option_pages()
+	public function add_options_pages()
 	{
-		if( function_exists('acf_add_options_page') ) {
+		if( function_exists('acf_add_options_sub_page') ) {
 			acf_add_options_page(array(
-				'page_title' 	=> __('CnC Events General Settings', 'cnc-events'),
+				'page_title' 	=> __('CnC Events Settings', 'cnc-events'),
 				'menu_title'	=> __('CnC Events', 'cnc-events'),
 				'menu_slug' 	=> 'cnc-events',
 				'capability'	=> 'edit_posts',
-				'redirect'		=> false
+				'parent_slug'	=> 'options-general.php',
 			));
 		}
 	}
@@ -77,23 +72,6 @@ class Controller
 	{
 		$api['key'] = $this->google_maps_api;
 		return $api;
-	}
-
-	public function modify_events_archive_query( $query ) {
-		if ( is_post_type_archive('event') && $query->is_main_query() && !is_admin() ) {
-			set_query_var( 'orderby', 'meta_value' );
-			if ($this->list_order != 'desc') {
-				set_query_var( 'order', 'ASC' );
-			} else {
-				set_query_var( 'order', 'DESC' );
-			}
-			set_query_var( 'meta_type', 'DATE');
-	        set_query_var( 'meta_key', 'event_date_start' );
-	        if ($this->list_show_past != 1) {
-		        set_query_var( 'meta_value', $this->view->get_current_date('Y-m-d') . ' 00:00:00' );
-		        set_query_var( 'meta_compare', '>=' );
-	        }
-	    }
 	}
 
 	public function ajax_get_calendar_month() {
