@@ -4,8 +4,10 @@ namespace cncEV;
 class Controller
 {
 
-	private $google_maps_api = 'AIzaSyDzFr49Ko_k2h_Z2Um9DAM-4cTyzImrx88';
-	
+	private $google_maps_api;
+	private $list_order;
+	private $list_show_past;
+
 	function __construct()
 	{
 		$this->model = new \cncEV\Model();
@@ -23,6 +25,28 @@ class Controller
 		add_action( 'manage_event_posts_custom_column', [$this, 'wpcolumn_column_content'], 5, 2 );
 		add_action( 'manage_edit-event_sortable_columns', [$this, 'wpcolumn_column_sortable'], 5, 2 );
 		add_action( 'pre_get_posts', [$this, 'wpcolumn_column_orderby'] );
+
+		$this->add_option_pages();
+
+		$this->google_maps_api = get_field('cnc-events-gmaps-api', 'option');
+		$this->list_order = get_field('cnc-events-order-method', 'option');
+		$this->list_show_past = get_field('cnc-events-show-past', 'option');
+	}
+
+	/**
+	 * Add admin option pages using ACF5
+	 */
+	public function add_option_pages()
+	{
+		if( function_exists('acf_add_options_page') ) {
+			acf_add_options_page(array(
+				'page_title' 	=> __('CnC Events General Settings', 'cnc-events'),
+				'menu_title'	=> __('CnC Events', 'cnc-events'),
+				'menu_slug' 	=> 'cnc-events',
+				'capability'	=> 'edit_posts',
+				'redirect'		=> false
+			));
+		}
 	}
 
 	/**
@@ -58,11 +82,17 @@ class Controller
 	public function modify_events_archive_query( $query ) {
 		if ( is_post_type_archive('event') && $query->is_main_query() && !is_admin() ) {
 			set_query_var( 'orderby', 'meta_value' );
-			set_query_var( 'order', 'ASC' );
+			if ($this->list_order != 'desc') {
+				set_query_var( 'order', 'ASC' );
+			} else {
+				set_query_var( 'order', 'DESC' );
+			}
 			set_query_var( 'meta_type', 'DATE');
 	        set_query_var( 'meta_key', 'event_date_start' );
-	        set_query_var( 'meta_value', $this->view->get_current_date('Y-m-d') . ' 00:00:00' );
-	        set_query_var( 'meta_compare', '>=' );
+	        if ($this->list_show_past != 1) {
+		        set_query_var( 'meta_value', $this->view->get_current_date('Y-m-d') . ' 00:00:00' );
+		        set_query_var( 'meta_compare', '>=' );
+	        }
 	    }
 	}
 

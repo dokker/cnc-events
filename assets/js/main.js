@@ -17,17 +17,18 @@ function new_map( $el ) {
 	
 	// var
 	var $markers = $el.find('.marker');
-	
-	
+
+
 	// vars
 	var args = {
+		 scrollwheel: false,
 		zoom		: 16,
 		center		: new google.maps.LatLng(0, 0),
 		mapTypeId	: google.maps.MapTypeId.ROADMAP
 	};
-	
-	
-	// create map	        	
+
+
+	// create map
 	var map = new google.maps.Map( $el[0], args);
 	console.log($el[0]);
 
