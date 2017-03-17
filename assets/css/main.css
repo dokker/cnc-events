@@ -76,6 +76,10 @@ article.event .entry-wrap {
 	height: 400px;
 }
 
+.cnc-event-archive {
+    padding: 40px 0;
+}
+
 
 /* Events Calendar */
 
@@ -202,6 +206,10 @@ article.event .entry-wrap {
 }
 
 
+
+/**
+ * Simple event list style
+ */
 .event-list-simple .event {
 	padding: 0;
 	background: transparent;
