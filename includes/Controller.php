@@ -23,7 +23,7 @@ class Controller
 		add_action( 'manage_edit-event_sortable_columns', [$this, 'wpcolumn_column_sortable'], 5, 2 );
 		add_action( 'pre_get_posts', [$this, 'wpcolumn_column_orderby'] );
 
-		$this->add_option_pages();
+		$this->add_options_pages();
 
 		$this->google_maps_api = get_field('cnc-events-gmaps-api', 'option');
 	}
@@ -31,15 +31,15 @@ class Controller
 	/**
 	 * Add admin option pages using ACF5
 	 */
-	public function add_option_pages()
+	public function add_options_pages()
 	{
-		if( function_exists('acf_add_options_page') ) {
+		if( function_exists('acf_add_options_sub_page') ) {
 			acf_add_options_page(array(
-				'page_title' 	=> __('CnC Events General Settings', 'cnc-events'),
+				'page_title' 	=> __('CnC Events Settings', 'cnc-events'),
 				'menu_title'	=> __('CnC Events', 'cnc-events'),
 				'menu_slug' 	=> 'cnc-events',
 				'capability'	=> 'edit_posts',
-				'redirect'		=> false
+				'parent_slug'	=> 'options-general.php',
 			));
 		}
 	}
