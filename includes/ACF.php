@@ -138,7 +138,7 @@ class ACF {
 					'label' => 'Google Maps API key',
 					'name' => 'cnc-events-gmaps-api',
 					'type' => 'text',
-					'instructions' => '',
+					'instructions' => 'Get your API key from <a href="https://console.developers.google.com/apis/credentials" target="_blank">here</a>.',
 					'required' => 0,
 					'conditional_logic' => 0,
 					'wrapper' => array (

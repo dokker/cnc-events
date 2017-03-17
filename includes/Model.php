@@ -4,11 +4,17 @@ namespace cncEV;
 class Model
 {
 	private $current_date;
+	private $list_order;
+	private $list_show_past;
 	
 	function __construct()
 	{
 		// Register hooks
 		add_filter('cnc_is_before_today', [$this, 'is_before_today'], 10, 1);
+
+		add_action('pre_get_posts', [$this, 'modify_events_archive_query']);
+		$this->list_order = get_field('cnc-events-order-method', 'option');
+		$this->list_show_past = get_field('cnc-events-show-past', 'option');
 	}
 
 	/**
@@ -242,4 +248,31 @@ class Model
 		return $excerpt;
 	}
 
+	public function modify_events_archive_query( $query ) {
+		if ( is_post_type_archive('event') && $query->is_main_query() && !is_admin() ) {
+		set_query_var( 'orderby', 'meta_value' );
+		if ($this->list_order != 'desc') {
+			set_query_var( 'order', 'ASC' );
+		} else {
+			set_query_var( 'order', 'DESC' );
+		}
+		set_query_var( 'meta_type', 'DATE');
+		    set_query_var( 'meta_key', 'event_date_start' );
+		    if ($this->list_show_past != 1) {
+		      set_query_var( 'meta_value', $this->get_current_date('Y-m-d') . ' 00:00:00' );
+		      set_query_var( 'meta_compare', '>=' );
+		    }
+		}
+	}
+
+	/**
+	 * Get current date formatted in specified format
+	 * @param string $format Date format to return
+	 * @return string Formatted date
+	 */
+	public function get_current_date($format = 'Y-m-d')
+	{
+		$date = new \DateTime();
+		return $date->format($format);
+	}
 }
