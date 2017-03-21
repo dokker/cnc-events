@@ -294,7 +294,7 @@ article.event .entry-wrap {
     bottom: -1px;
     left: 0;
     right: 0;
-    color: rgba(255,255,255,.75);
+    color: rgba(255,255,255,1);
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
 }
@@ -305,6 +305,10 @@ article.event .entry-wrap {
     background: rgba(0,0,0,.5);
     border-bottom: solid 1px rgba(255,255,255,.2);
     position: relative;
+}
+
+.event-overlay .overlay-top h4 {
+    color: #fff;
 }
 
 .overlay-top h4 {
