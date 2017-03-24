@@ -32,13 +32,6 @@
 				<?php endif; ?>
 			</article>
 		</div>
-		<aside id="mk-sidebar" class="mk-builtin">
-			<div class="sidebar-wrapper">
-				<?php if (is_active_sidebar('sidebar-1')): ?>
-					<?php dynamic_sidebar('sidebar-1'); ?>
-				<?php endif; ?>
-			</div>
-		</aside>
 		<div class="clearboth"></div>
 	</div>
 </div>
