@@ -386,3 +386,21 @@ article.event .entry-wrap {
     -webkit-transform: translateY(0px);
 }
 
+.single .event-details {
+    float: left;
+}
+
+.related-product-container {
+    float: right;
+    margin-top: 20px;
+}
+
+.event-head:after {
+    content: ' ';
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+
