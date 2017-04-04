@@ -129,6 +129,92 @@ class ACF {
 		));
 
 		acf_add_local_field_group(array (
+			'key' => 'group_8302159a59fa3',
+			'title' => 'Esemény részletei',
+			'fields' => array (
+				array (
+					'key' => 'field_8808c98ba280b',
+					'label' => 'Helyszín név',
+					'name' => 'event_location_name',
+					'type' => 'text',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array (
+						'width' => '',
+						'class' => '',
+						'id' => '',
+						),
+					'default_value' => '',
+					'placeholder' => '',
+					'prepend' => '',
+					'append' => '',
+					'maxlength' => '',
+					),
+				array (
+					'key' => 'field_5809c1efa270c',
+					'label' => 'Helyszín',
+					'name' => 'event_location',
+					'type' => 'google_map',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array (
+						'width' => '',
+						'class' => '',
+						'id' => '',
+						),
+					'center_lat' => '',
+					'center_lng' => '',
+					'zoom' => '',
+					'height' => '',
+					),
+				array (
+					'key' => 'field_58dbb2253ef52',
+					'label' => 'Kapcsolódó termék',
+					'name' => 'related_product',
+					'type' => 'post_object',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array (
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'post_type' => array (
+						0 => 'product',
+					),
+					'taxonomy' => array (
+						0 => 'product_cat:allando-esemenyek',
+					),
+					'allow_null' => 1,
+					'multiple' => 0,
+					'return_format' => 'object',
+					'ui' => 1,
+				),
+			),
+			'location' => array (
+				array (
+					array (
+						'param' => 'post_type',
+						'operator' => '==',
+						'value' => 'stationaryevent',
+					),
+				),
+			),
+			'menu_order' => 0,
+			'position' => 'normal',
+			'style' => 'default',
+			'label_placement' => 'top',
+			'instruction_placement' => 'label',
+			'hide_on_screen' => '',
+			'active' => 1,
+			'description' => '',
+		));
+
+
+		acf_add_local_field_group(array (
 			'key' => 'group_58c8066e2168c',
 			'title' => 'Event General settings',
 			'fields' => array (

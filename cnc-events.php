@@ -35,10 +35,33 @@ function __cnc_events_load_plugin()
 	// load translations
 	load_plugin_textdomain( 'cnc-events', false, 'cnc-events/languages' );
 
-	$events = new cncEV\ContentType('event', 
-		['menu_icon' => 'dashicons-calendar-alt', 'has_archive' => true, 'supports' => ['title', 'editor', 'thumbnail']], 
-		['singular_name' => __('Event', 'cnc-events'), 'plural_name' => __('Events', 'cnc-events')],
-		_x('events', 'events archive slug', 'cnc-events'));
+	$events = new cncEV\ContentType(
+		'event',
+		[
+			'menu_icon' => 'dashicons-calendar-alt',
+			'has_archive' => true,
+			'supports' => ['title', 'editor', 'thumbnail']
+		],
+		[
+			'singular_name' => __('Event', 'cnc-events'),
+			'plural_name' => __('Events', 'cnc-events')
+		],
+		_x('events', 'events archive slug', 'cnc-events')
+	);
+
+	$stat_events = new cncEV\ContentType(
+		'stationaryevent',
+		[
+			'menu_icon' => 'dashicons-calendar-alt',
+			'has_archive' => true,
+			'supports' => ['title', 'editor', 'thumbnail']
+		],
+		[
+			'singular_name' => __('Stationary Event', 'cnc-events'),
+			'plural_name' => __('Stationary Events', 'cnc-events')
+		],
+		_x('stationary-events', 'stationary events archive slug', 'cnc-events')
+	);
 
 	// instantiate classes to register hooks
 	$controller = new cncEV\Controller();
@@ -58,6 +81,9 @@ add_filter( 'archive_template', '__cnc_events_archive_template' );
 function __cnc_events_single_template( $template ) {
 	if(get_post_type() == 'event') {
 		$template = CNC_TEMPLATE_DIR . CNC_DS. 'single-event.php';
+	}
+	elseif(get_post_type() == 'stationaryevent') {
+		$template = CNC_TEMPLATE_DIR . CNC_DS. 'single-stationaryevent.php';
 	}
 	return $template;
 }

@@ -53,7 +53,7 @@ class Controller
 			wp_enqueue_script('cnc-events-script');
 			wp_register_script('cnc-events-calendar', CNC_PROJECT_URL . CNC_DS . 'assets/js/calendar.js', array('jquery'));
 			wp_register_script('googlemaps', 'https://maps.googleapis.com/maps/api/js?v=3.exp&key=' . $this->google_maps_api, null, null, true);
-			if (is_singular( 'event' )) {
+			if (is_singular( 'event' ) || is_singular( 'stationaryevent' )) {
 				wp_enqueue_script('googlemaps');
 			}
 		}

@@ -65,7 +65,9 @@ article.event .entry-wrap {
 }
 
 .single-event address,
+.single-stationaryevent address,
 .single-event time,
+.single-stationaryevent .content,
 .single-event .content {
 	margin-top: 20px;
 	display: block;

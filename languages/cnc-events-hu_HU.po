@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CNC Event plugin\n"
-"POT-Creation-Date: 2016-11-08 16:23+0100\n"
-"PO-Revision-Date: 2016-11-08 16:23+0100\n"
+"POT-Creation-Date: 2017-03-29 16:08+0200\n"
+"PO-Revision-Date: 2017-03-30 12:52+0200\n"
 "Last-Translator: docker <dock3r@gmail.com>\n"
 "Language-Team: colorandcode <denes@colorandcode.hu>\n"
 "Language: hu_HU\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.9\n"
+"X-Generator: Poedit 1.8.11\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: __;_e;_x:1,2c\n"
@@ -27,6 +27,19 @@ msgstr "Események"
 msgctxt "events archive slug"
 msgid "events"
 msgstr "esemenyek"
+
+#: cnc-events.php:44
+msgid "Stationary Event"
+msgstr "Állandó Esemény"
+
+#: cnc-events.php:44
+msgid "Stationary Events"
+msgstr "Állandó Események"
+
+#: cnc-events.php:45
+msgctxt "stationary events archive slug"
+msgid "stationary-events"
+msgstr "allando-esemenyek"
 
 #: includes/ContentType.php:52 includes/ContentType.php:53
 #, php-format
@@ -77,11 +90,19 @@ msgstr "Nincs %s a lomtárban"
 msgid "Parent %s"
 msgstr "Szülő %s"
 
-#: includes/Controller.php:85
+#: includes/Controller.php:38
+msgid "CnC Events Settings"
+msgstr "CnC Events Beállítások"
+
+#: includes/Controller.php:39
+msgid "CnC Events"
+msgstr "CnC Events"
+
+#: includes/Controller.php:97
 msgid "Start date"
 msgstr "Kezdő időpont"
 
-#: templates/archive-events.php:6
+#: templates/archive-events.php:7
 msgid "Sorry, no results were found."
 msgstr "Sajnáljuk, nincs eremény."
 
