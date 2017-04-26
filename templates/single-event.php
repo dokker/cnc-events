@@ -8,7 +8,6 @@
 			<article id="<?php the_ID(); ?>" itemscope="itemscope" itemtype="https://schema.org/Event" itemprop="event">
 				<div class="featured-area">
 				<?php if (has_post_thumbnail()): ?>
-					<?php the_post_thumbnail('event-medium'); ?>
 				<?php else: ?>
 				<?php endif; ?>
 				</div>
