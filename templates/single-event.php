@@ -15,8 +15,8 @@
 					<div class="event-details">
 						<address><?php the_field('event_location_name'); ?></address>
 						<time>
-							<?php echo apply_filters('cnc_format_date_field', get_field('event_date_start', false, false), 'Y.m.d.'); ?>
-							<?php echo (!empty(get_field('event_date_end'))) ? ' - ' . apply_filters('cnc_format_date_field', get_field('event_date_end', false, false), 'Y.m.d.') : ''; ?>
+							<?php echo apply_filters('cnc_format_date_field', get_field('event_date_start', false, false), 'Y.m.d. H:i'); ?>
+							<?php echo (!empty(get_field('event_date_end'))) ? ' - ' . apply_filters('cnc_format_date_field', get_field('event_date_end', false, false), 'Y.m.d. H:i') : ''; ?>
 						</time>
 					</div>
 					<?php $related_product = get_field('related_product');
