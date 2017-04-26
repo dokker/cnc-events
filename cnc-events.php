@@ -43,10 +43,10 @@ function __cnc_events_load_plugin()
 			'supports' => ['title', 'editor', 'thumbnail']
 		],
 		[
-			'singular_name' => __('Event', 'cnc-events'),
-			'plural_name' => __('Events', 'cnc-events')
+			'singular_name' => __('Experience', 'cnc-events'),
+			'plural_name' => __('Experiences', 'cnc-events')
 		],
-		_x('events', 'events archive slug', 'cnc-events')
+		_x('experiences', 'events archive slug', 'cnc-events')
 	);
 
 	$stat_events = new cncEV\ContentType(

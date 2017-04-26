@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CNC Event plugin\n"
-"POT-Creation-Date: 2017-03-29 16:08+0200\n"
-"PO-Revision-Date: 2017-03-30 12:52+0200\n"
+"POT-Creation-Date: 2017-04-06 16:34+0200\n"
+"PO-Revision-Date: 2017-04-06 16:34+0200\n"
 "Last-Translator: docker <dock3r@gmail.com>\n"
 "Language-Team: colorandcode <denes@colorandcode.hu>\n"
 "Language: hu_HU\n"
@@ -15,28 +15,28 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e;_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: cnc-events.php:40
-msgid "Event"
-msgstr "Esemény"
+#: cnc-events.php:46
+msgid "Experience"
+msgstr "Élmény"
 
-#: cnc-events.php:40
-msgid "Events"
-msgstr "Események"
+#: cnc-events.php:47
+msgid "Experiences"
+msgstr "Élmények"
 
-#: cnc-events.php:41
+#: cnc-events.php:49
 msgctxt "events archive slug"
-msgid "events"
-msgstr "esemenyek"
+msgid "experiences"
+msgstr "elmenyek"
 
-#: cnc-events.php:44
+#: cnc-events.php:60
 msgid "Stationary Event"
 msgstr "Állandó Esemény"
 
-#: cnc-events.php:44
+#: cnc-events.php:61
 msgid "Stationary Events"
 msgstr "Állandó Események"
 
-#: cnc-events.php:45
+#: cnc-events.php:63
 msgctxt "stationary events archive slug"
 msgid "stationary-events"
 msgstr "allando-esemenyek"
@@ -105,6 +105,20 @@ msgstr "Kezdő időpont"
 #: templates/archive-events.php:7
 msgid "Sorry, no results were found."
 msgstr "Sajnáljuk, nincs eremény."
+
+#~ msgctxt "events archive slug"
+#~ msgid "experiences-archive"
+#~ msgstr "elmenyek-archivum"
+
+#~ msgid "Event"
+#~ msgstr "Esemény"
+
+#~ msgid "Events"
+#~ msgstr "Események"
+
+#~ msgctxt "events archive slug"
+#~ msgid "events"
+#~ msgstr "esemenyek"
 
 #~ msgid "Read more"
 #~ msgstr "Tovább"
